@@ -22,12 +22,12 @@ return new class extends Migration
             $table->timestamps();
         });
         Schema::create('Ref_Provinsis', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
             $table->string('name',100);
             $table->timestamps();
         });
         Schema::create('Ref_Kotas', function (Blueprint $table) {
-            $table->string('id');
+            $table->id();
             $table->string('provinsi_id');
             $table->string('name',100);
             $table->timestamps();

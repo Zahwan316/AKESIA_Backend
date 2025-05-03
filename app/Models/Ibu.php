@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ibu extends Model
 {
+    protected $table = "ibus";
     //
     protected $fillable = [
         'nik',
@@ -24,8 +25,6 @@ class Ibu extends Model
         'usia_kehamilan',
         'user_id',
     ];
-
-    protected $table = "Ibus";
 
     public function User(): HasOne
     {

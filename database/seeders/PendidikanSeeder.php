@@ -15,15 +15,15 @@ class PendidikanSeeder extends Seeder
     {
         //
         $data = [
-            ['nama' => 'Tidak sekolah'],
-            ['nama' => 'SD'],
-            ['nama' => 'SLTP sederajat'],
-            ['nama' => 'SLTA sederajat'],
-            ['nama' => 'D1-D3 sederajat'],
-            ['nama' => 'D4'],
-            ['nama' => 'S1'],
-            ['nama' => 'S2'],
-            ['nama' => 'S3'],
+            ['name' => 'Tidak sekolah'],
+            ['name' => 'SD'],
+            ['name' => 'SLTP sederajat'],
+            ['name' => 'SLTA sederajat'],
+            ['name' => 'D1-D3 sederajat'],
+            ['name' => 'D4'],
+            ['name' => 'S1'],
+            ['name' => 'S2'],
+            ['name' => 'S3'],
         ];
 
         DB::table('Ref_Pendidikans')->insert($data);
