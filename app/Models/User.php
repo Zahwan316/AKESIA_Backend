@@ -59,6 +59,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function ibu(){
-        return $this->belongsTo(Ibu::class);
+        return $this->hasOne(Ibu::class, 'user_id','id');
+    }
+
+    public function bidan(){
+        return $this->hasOne(Bidan::class, 'user_id','id');
     }
 }

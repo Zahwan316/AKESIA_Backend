@@ -73,7 +73,6 @@ class BidanController extends Controller
             $Bidan = Bidan::create([
                 'user_id' => $request->user_id,
                 'pendidikan_id' => $request->pendidikan_id,
-
                 'provinsi_id' => $request->provinsi_id,
                 'kota_id' => $request->kota_id,
                 'image_id' => $upload->id,

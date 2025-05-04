@@ -19,4 +19,8 @@ class Bidan extends Model
         'no_STR',
         'no_SIP'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

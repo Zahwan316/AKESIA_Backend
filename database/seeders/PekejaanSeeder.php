@@ -15,14 +15,14 @@ class PekejaanSeeder extends Seeder
     {
         //
         $data = [
-            ['nama' => 'Tidak bekerja'],
-            ['nama' => 'PNS'],
-            ['nama' => 'TNI/POLRI'],
-            ['nama' => 'BUMN'],
-            ['nama' => 'Pegawai Swasta/ Wirausaha'],
-            ['nama' => 'lain-lain '],
+            ['name' => 'Tidak bekerja'],
+            ['name' => 'PNS'],
+            ['name' => 'TNI/POLRI'],
+            ['name' => 'BUMN'],
+            ['name' => 'Pegawai Swasta/ Wirausaha'],
+            ['name' => 'lain-lain '],
         ];
 
-        DB::table('ref_pekerjaans')->insert($data);
+        DB::table('Ref_Pekerjaans')->insert($data);
     }
 }

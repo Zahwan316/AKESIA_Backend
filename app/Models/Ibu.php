@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ibu extends Model
@@ -26,8 +27,8 @@ class Ibu extends Model
         'user_id',
     ];
 
-    public function User(): HasOne
+    public function User(): BelongsTo
     {
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->belongsTo(User::class);
     }
 }

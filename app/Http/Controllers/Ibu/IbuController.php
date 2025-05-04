@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ibu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ibu;
+use App\Models\User;
 
 class IbuController extends Controller
 {
@@ -29,20 +30,37 @@ class IbuController extends Controller
             'pekerjaan' => 'required',
             'alamat_domisili' => 'required',
             'telepon' => 'required|unique:ibus',
-            'user_id' => 'required',
+            'nama_lengkap' => 'required',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
             'usia_kehamilan' => 'nullable'
         ]);
 
     try{
-
-        $data = $request->only([
+        /* $data = $request->only([
             'nik', 'golongan_darah', 'tempat_lahir', 'tanggal_lahir',
             'pendidikan', 'pekerjaan', 'alamat_domisili', 'telepon', 'user_id',
             'berat_badan', 'tinggi_badan', 'usia_kehamilan'
+        ]); */
+        $user = User::find(auth()->guard()->user()->id);
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->save();
+
+        $ibu = Ibu::create([
+            'nik' => $request->nik,
+            'golongan_darah' => $request->golongan_darah,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'pendidikan' => $request->pendidikan,
+            'pekerjaan' => $request->pekerjaan,
+            'alamat_domisili' => $request->alamat_domisili,
+            'telepon' => $request->telepon,
+            'user_id' => auth()->guard()->user()->id,
+            'berat_badan' => $request->berat_badan,
+            'tinggi_badan' => $request->tinggi_badan,
+            'usia_kehamilan' => $request->usia_kehamilan
+
         ]);
-        Ibu::create($data);
         return response()->json(['message' => 'Data berhasil disimpan', 'status_code' => 201], 201);
     }
     catch(\Exception $e){
