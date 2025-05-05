@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bayi;
 use App\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Bayi;
+use App\Models\Ibu;
 use Illuminate\Http\Request;
 
 class BayiController extends Controller
@@ -35,7 +36,6 @@ class BayiController extends Controller
     {
         //
         $validate = $request->validate([
-            'ibu_id' => 'required|exists:ibus,id',
             'nama_lengkap' => 'required|string|max:100',
             'jenis_kelamin' => 'required|string|max:2',
             'nik' => 'nullable|string|size:16|unique:bayis,nik',
@@ -50,20 +50,22 @@ class BayiController extends Controller
         ]);
 
         try{
-            $bayi = Bayi::create($request->only([
-                'ibu_id',
-                'nama_lengkap',
-                'jenis_kelamin',
-                'nik',
-                'golongan_darah',
-                'tempat_lahir',
-                'tanggal_lahir',
-                'no_akta_kelahiran',
-                'no_registrasi_kohort_bayi',
-                'no_registrasi_kohort_balita',
-                'no_catatan_medik_rs',
-                'anak_ke',
-            ]));
+            $ibu_id = Ibu::where('user_id', auth()->guard()->user()->id)->first();
+
+            $bayi = Bayi::create([
+                'ibu_id' => $ibu_id->id,
+                'nama_lengkap' => $request->nama_lengkap,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'nik' => $request->nik,
+                'golongan_darah' => $request->golongan_darah,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'no_akta_kelahiran' => $request->no_akta_kelahiran,
+                'no_registrasi_kohort_bayi' => $request->no_registrasi_kohort_bayi,
+                'no_registrasi_kohort_balita' => $request->no_registrasi_kohort_balita,
+                'no_catatan_medik_rs' => $request->no_catatan_medik_rs,
+                'anak_ke' => $request->anak_ke,
+            ]);
             return $this->apiResponse('Data berhasil ditambahkan', $bayi);
         }
         catch(\Exception $e){

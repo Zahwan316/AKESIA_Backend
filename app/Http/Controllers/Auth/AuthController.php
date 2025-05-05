@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
-        return response()->json(compact('user','token'), 201);
+        return response()->json(['success'=> true,'token'=> $token, 'message' => 'Registrasi Berhasil', 'statusCode' => 200],200);
     }
 
     public function checkIsCompleteProfile(Request $request){
