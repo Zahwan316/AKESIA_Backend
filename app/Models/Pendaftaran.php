@@ -18,4 +18,13 @@ class Pendaftaran extends Model
         'nama_anak',
         'umur_anak',
     ];
+
+    public function pelayanan(){
+        return $this->belongsTo(Pelayanan::class);
+    }
+
+    public function ibu(){
+        return $this->belongsTo(Ibu::class);
+    }
+
 }

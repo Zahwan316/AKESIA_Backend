@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pendaftaran;
 
 use App\apiResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Ibu;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class PendaftaranController extends Controller
     public function index()
     {
         //
-        $pendaftaran = Pendaftaran::paginate();
+        $pendaftaran = Pendaftaran::with('pelayanan')->paginate();
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 
@@ -35,11 +36,11 @@ class PendaftaranController extends Controller
     {
         //
         $validate = $request->validate([
-            'ibu_id' => 'required',
+            //'ibu_id' => 'required',
             'bidan_id' => 'nullable',
             'pelayanan_id' => 'required',
             'tanggal_pendaftaran' => 'required',
-            'jam_pendaftaran' => 'required',
+            'jam_pendaftaran' => 'nullable',
             'status' => 'nullable',
             'keluhan' => 'required',
             'nama_anak' => 'required',
@@ -47,9 +48,19 @@ class PendaftaranController extends Controller
         ]);
 
         try{
-            $pendaftaran = Pendaftaran::create($request->only([
-                'ibu_id', 'bidan_id', 'pelayanan_id', 'tanggal_pendaftaran', 'jam_pendaftaran', 'status', 'keluhan', 'nama_anak', 'umur_anak', 'status' => 'Menunggu Konfirmasi'
-            ]));
+            $ibu = Ibu::where('user_id', auth()->guard()->user()->id)->first();
+
+            $pendaftaran = Pendaftaran::create([
+                'ibu_id' => $ibu->id,
+                'bidan_id' => $request->bidan_id,
+                'pelayanan_id' => $request->pelayanan_id,
+                'tanggal_pendaftaran' => $request->tanggal_pendaftaran,
+                'jam_pendaftaran' => $request->jam_pendaftaran,
+                'status' => 'Menunggu Konfirmasi',
+                'keluhan' => $request->keluhan,
+                'nama_anak' => $request->nama_anak,
+                'umur_anak' => $request->umur_anak,
+            ]);
 
             return $this->apiResponse('Data berhasil disimpan', $pendaftaran);
         }
@@ -65,7 +76,7 @@ class PendaftaranController extends Controller
     public function show(string $id)
     {
         //
-        $pendaftaran = Pendaftaran::find($id);
+        $pendaftaran = Pendaftaran::find($id)::with(['pelayanan', 'ibu.user'])->first();
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 
@@ -84,15 +95,15 @@ class PendaftaranController extends Controller
     {
         //
         $validate = $request->validate([
-            'ibu_id' => 'required',
+            //'ibu_id' => 'required',
             'bidan_id' => 'nullable',
-            'pelayanan_id' => 'required',
-            'tanggal_pendaftaran' => 'required',
-            'jam_pendaftaran' => 'required',
+            'pelayanan_id' => 'nullable',
+            'tanggal_pendaftaran' => 'nullable',
+            'jam_pendaftaran' => 'nullable',
             'status' => 'nullable',
-            'keluhan' => 'required',
-            'nama_anak' => 'required',
-            'umur_anak' => 'required',
+            'keluhan' => 'nullable',
+            'nama_anak' => 'nullable',
+            'umur_anak' => 'nullable',
         ]);
 
         try{
@@ -116,5 +127,13 @@ class PendaftaranController extends Controller
         $pendaftaran = Pendaftaran::find($id);
         $pendaftaran->delete();
         return $this->apiResponse('Data berhasil dihapus');
+    }
+
+    public function getCurrUserPendaftaran(){
+        $ibu = Ibu::where('user_id', auth()->guard()->user()->id)->first();
+        $data = Pendaftaran::where('ibu_id', $ibu->id)->with('pelayanan')->get();
+        //dd($data);
+
+        return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 }

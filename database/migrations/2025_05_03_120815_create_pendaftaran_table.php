@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('bidan_id')->nullable()->constrained('bidans')->cascadeOnDelete();
             $table->foreignId('pelayanan_id')->constrained();
             $table->timestamp('tanggal_pendaftaran');
-            $table->time('jam_pendaftaran');
+            $table->time('jam_pendaftaran')->nullable();
             $table->string('status', 24);
             $table->text('keluhan');
             $table->string('nama_anak', 56);

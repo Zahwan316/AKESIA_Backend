@@ -31,4 +31,8 @@ class Ibu extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ibu() {
+        return $this->hasMany(Pendaftaran::class);
+    }
 }

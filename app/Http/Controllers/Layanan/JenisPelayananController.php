@@ -19,7 +19,7 @@ class JenisPelayananController extends Controller
     public function index()
     {
         //
-        $jenis_layanan = Jenis_layanan::all();
+        $jenis_layanan = Jenis_layanan::with('upload')->get();
 
         return $this->apiResponse('Data berhasil diambil', $jenis_layanan);
     }

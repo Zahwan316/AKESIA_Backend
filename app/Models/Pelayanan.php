@@ -14,4 +14,13 @@ class Pelayanan extends Model
         'harga',
         'kuantitas',
     ];
+
+
+    public function pendaftaran(){
+        return $this->hasOne(Pendaftaran::class);
+    }
+
+    public function upload(){
+        return $this->hasOne(Upload::class);
+    }
 }

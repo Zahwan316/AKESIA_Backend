@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Layanan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ibu;
 use App\Models\Pelayanan;
 use Illuminate\Http\Request;
 
@@ -11,10 +12,18 @@ class PelayananController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = Pelayanan::all();
+        $pelayananWithJenisId = $request->query('jenis_pelayanan_id');
+
+        if($pelayananWithJenisId){
+            $data = Pelayanan::where('jenis_layanan_id', $pelayananWithJenisId)->get();
+        }
+        else{
+            $data = Pelayanan::all();
+        }
+
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 
@@ -113,4 +122,6 @@ class PelayananController extends Controller
         $pelayanan->delete();
         return response()->json(['message' => 'Data berhasil dihapus', 'status_code' => 200], 200);
     }
+
+
 }
