@@ -44,6 +44,8 @@ route::prefix('layanan')->middleware('auth:api')->group( function () {
 Route::prefix('referensi')->middleware('auth:api')->group( function () {
     Route::get('/pendidikan', [ReferensiController::class,'showPendidikan']);
     Route::get('/pekerjaan', [ReferensiController::class,'showPekerjaan']);
+    Route::get('/kota', [ReferensiController::class,'showKota']);
+    Route::get('/provinsi', [ReferensiController::class,'showProvinsi']);
 });
 
 Route::get("/", function () {

@@ -45,5 +45,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'bidan',
             'email' => 'eve@gmail.com',
         ]);
+
+        
     }
 }

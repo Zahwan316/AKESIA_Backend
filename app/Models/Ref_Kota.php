@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Ref_Kota extends Model
 {
     //
+    protected $table = "Ref_Kotas";
 }

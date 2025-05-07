@@ -38,17 +38,17 @@ class BidanController extends Controller
     {
         //
         $validate = $request->validate([
-            'user_id' => 'required',
-            'pendidikan_id' => 'required',
-
+            //'pendidikan_id' => 'required',
             'provinsi_id' => 'required',
+            'jenis_praktik_id' => 'required',
             'kota_id' => 'required',
             'img' => 'required|mimes:png,jpg,jpeg',
             'status_keanggotaan_ibi' => 'required',
             'nama_tempat_praktik' => 'required',
             'no_STR' => 'required',
             'no_SIP' => 'required',
-            'nama_lengkap' => 'nullable'
+            'nama_lengkap' => 'nullable',
+            'tempat_bekerja' => 'nullable'
         ]);
 
         try{
@@ -66,20 +66,22 @@ class BidanController extends Controller
             }
 
             //Update User nama lengkap
-            $User = User::findOrFail($request->user_id);
+            $User = User::findOrFail(auth()->guard()->user()->id);
             $User->nama_lengkap = $request->nama_lengkap;
             $User->save();
 
             $Bidan = Bidan::create([
-                'user_id' => $request->user_id,
-                'pendidikan_id' => $request->pendidikan_id,
+                'user_id' => auth()->guard()->user()->id,
+                //'pendidikan_id' => $request->pendidikan_id,
                 'provinsi_id' => $request->provinsi_id,
+                'jenis_praktik_id' => $request->jenis_praktik_id,
                 'kota_id' => $request->kota_id,
                 'image_id' => $upload->id,
                 'status_keanggotaan_ibi' => $request->status_keanggotaan_ibi,
                 'nama_tempat_praktik' => $request->nama_tempat_praktik,
                 'no_STR' => $request->no_STR,
-                'no_SIP' => $request->no_SIP
+                'no_SIP' => $request->no_SIP,
+                'tempat_bekerja' => $request->tempat_bekerja
             ]);
 
             return $this->apiResponse('Data berhasil disimpan', $Bidan, 201, false);
@@ -95,6 +97,10 @@ class BidanController extends Controller
     public function show(string $id)
     {
         //
+        $data = Bidan::find($id);
+
+        return $this->apiResponse('Data berhasil diambil', $data);
+
     }
 
     /**
@@ -113,15 +119,17 @@ class BidanController extends Controller
         //
         $validate = $request->validate([
             'user_id' => 'nullable',
-            'pendidikan_id' => 'nullable',
+            //'pendidikan_id' => 'nullable',
             'provinsi_id' => 'nullable',
             'kota_id' => 'nullable',
+            'jenis_praktik_id' => 'nullable',
             'img' => 'nullable|mimes:png,jpg,jpeg',
             'status_keanggotaan_ibi' => 'nullable',
             'nama_tempat_praktik' => 'nullable',
             'no_STR' => 'nullable',
             'no_SIP' => 'nullable',
-            'nama_lengkap' => 'nullable'
+            'nama_lengkap' => 'nullable',
+            'tempat_bekerja' => 'nullable'
         ]);
 
         try{
@@ -152,14 +160,16 @@ class BidanController extends Controller
 
             $bidan->update($request->only([
                 'user_id',
-                'pendidikan_id',
+                //'pendidikan_id',
                 'provinsi_id',
                 'kota_id',
                 'image_id',
+                'jenis_praktik_id',
                 'status_keanggotaan_ibi',
                 'nama_tempat_praktik',
                 'no_STR',
                 'no_SIP',
+                'tempat_bekerja',
             ]));
 
 
