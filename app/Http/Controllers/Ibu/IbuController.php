@@ -22,7 +22,7 @@ class IbuController extends Controller
     //
     public function LengkapiData(Request $request){
         $validate = $request->validate([
-            'nik' => 'required|unique:ibus|integer',
+            'nik' => 'required|string|unique:ibus|size:16',
             'golongan_darah' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',

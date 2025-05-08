@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Form\PemeriksaanUmum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Layanan\JenisPelayananController;
 use App\Http\Controllers\Layanan\PelayananController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\Ref\ReferensiController;
+use App\Models\Form_pemeriksaan_umum;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -45,7 +47,14 @@ Route::prefix('referensi')->middleware('auth:api')->group( function () {
     Route::get('/pendidikan', [ReferensiController::class,'showPendidikan']);
     Route::get('/pekerjaan', [ReferensiController::class,'showPekerjaan']);
     Route::get('/kota', [ReferensiController::class,'showKota']);
+    Route::get('/kesadaran', [ReferensiController::class,'showKesadaran']);
     Route::get('/provinsi', [ReferensiController::class,'showProvinsi']);
+    Route::get('/jenis_praktik', [ReferensiController::class,'showJenisPraktik']);
+});
+
+//form
+Route::prefix('form')->middleware('auth:api')->group(function(){
+    Route::resource('pemeriksaan_umum', PemeriksaanUmum::class);
 });
 
 Route::get("/", function () {

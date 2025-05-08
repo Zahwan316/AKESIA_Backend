@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Ref;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ref_jenis_praktik;
+use App\Models\Ref_Kesadaran;
 use App\Models\Ref_Kota;
 use App\Models\Ref_Pekerjaan;
 use App\Models\Ref_Pendidikan;
@@ -29,6 +31,16 @@ class ReferensiController extends Controller
 
     public function showProvinsi(){
         $data = Ref_Provinsi::all();
+        return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
+    }
+
+    public function showJenisPraktik(){
+        $data = Ref_jenis_praktik::all();
+        return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
+    }
+
+    public function showKesadaran(){
+        $data = Ref_Kesadaran::all();
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 }

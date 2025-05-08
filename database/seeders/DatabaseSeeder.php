@@ -46,6 +46,14 @@ class DatabaseSeeder extends Seeder
             'email' => 'eve@gmail.com',
         ]);
 
-        
+        $this->call([
+            JenisPraktikSeeder::class,
+            KesadaranSeeder::class,
+            PekejaanSeeder::class,
+            PendidikanSeeder::class,
+            // Tambahkan seeder lain di sini
+        ]);
+
+
     }
 }

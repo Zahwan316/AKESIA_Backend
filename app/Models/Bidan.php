@@ -17,7 +17,8 @@ class Bidan extends Model
         'status_keanggotaan_ibi',
         'nama_tempat_praktik',
         'no_STR',
-        'no_SIP'
+        'no_SIP',
+        'jenis_praktik_id',
     ];
 
     public function user(){
