@@ -106,7 +106,7 @@ class BayiController extends Controller
             'golongan_darah' => 'nullable|string|max:4',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
-            'no_akta_kelahiran' => 'nullable|string|unique:bayis,no_akta_kelahiran',
+            'no_akta_kelahiran' => 'nullable|string',
             'no_registrasi_kohort_bayi' => 'nullable|string|unique:bayis,no_registrasi_kohort_bayi',
             'no_registrasi_kohort_balita' => 'nullable|string|unique:bayis,no_registrasi_kohort_balita',
             'no_catatan_medik_rs' => 'nullable|string|unique:bayis,no_catatan_medik_rs',
@@ -153,5 +153,11 @@ class BayiController extends Controller
             return $this->apiResponse('Gagal menghapus data', $e->getMessage());
         }
 
+    }
+
+    public function getAnak(){
+        $ibu_id = Ibu::where('user_id', auth()->guard()->user()->id)->first();
+        $anak = Bayi::where('ibu_id', $ibu_id->id)->get();
+        return $this->apiResponse('Data berhasil diambil', $anak);
     }
 }

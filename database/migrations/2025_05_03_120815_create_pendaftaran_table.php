@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('ibu_id')->constrained()->cascadeOnDelete();
             $table->foreignId('bidan_id')->nullable()->constrained('bidans')->cascadeOnDelete();
+            $table->foreignId('bayi_id')->contarained('bayis');
             $table->foreignId('pelayanan_id')->constrained();
             $table->timestamp('tanggal_pendaftaran');
             $table->time('jam_pendaftaran')->nullable();
             $table->string('status', 24);
             $table->text('keluhan');
-            $table->string('nama_anak', 56);
-            $table->integer('umur_anak');
             $table->timestamps();
         });
     }

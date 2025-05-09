@@ -24,11 +24,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'username' => 'killua',
-            'nama_lengkap' => 'Killua Zoldyck',
+            'username' => 'Jinan',
+            'nama_lengkap' => 'Jinan Safa Safira',
             'password' => Hash::make('12345678'),
             'role' => 'user',
-            'email' => 'killua@gmail.com',
+            'email' => 'Jinan@gmail.com',
         ]);
 
         User::create([
@@ -51,6 +51,8 @@ class DatabaseSeeder extends Seeder
             KesadaranSeeder::class,
             PekejaanSeeder::class,
             PendidikanSeeder::class,
+            JenisFormSeeder::class,
+            BayiSeeder::class,
             // Tambahkan seeder lain di sini
         ]);
 

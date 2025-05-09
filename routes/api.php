@@ -36,6 +36,10 @@ Route::middleware('auth:api')->resource('pendaftaran', PendaftaranController::cl
 Route::middleware('auth:api')->get('getCurrUserPendaftaran', [PendaftaranController::class, 'getCurrUserPendaftaran']);
 Route::middleware('auth:api')->resource('bayi', BayiController::class);
 
+//bayi
+Route::middleware('auth:api')->get('/getUserAnak', [BayiController::class,'getAnak']);
+
+
 //Layanan
 route::prefix('layanan')->middleware('auth:api')->group( function () {
     Route::resource('jenis_pelayanan', JenisPelayananController::class);

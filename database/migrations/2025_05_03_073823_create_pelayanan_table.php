@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pelayanans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('jenis_layanan_id')->constrained('jenis_layanans')->onDelete('cascade');
+            $table->foreignId('form_id')->constained('Ref_jenis_form');
             $table->string('nama')->nullable();
             $table->integer('harga');
             $table->integer('kuantitas');
