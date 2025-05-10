@@ -12,7 +12,7 @@ class Pelayanan extends Model
         'jenis_layanan_id',
         'keterangan',
         'harga',
-        'kuantitas',
+        'form_id',
     ];
 
 

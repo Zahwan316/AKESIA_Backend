@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('pelayanan_id')->constrained();
             $table->timestamp('tanggal_pendaftaran');
             $table->time('jam_pendaftaran')->nullable();
+            $table->boolean('isVerif');
             $table->string('status', 24);
             $table->text('keluhan');
             $table->timestamps();

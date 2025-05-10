@@ -43,8 +43,8 @@ class PendaftaranController extends Controller
             'jam_pendaftaran' => 'nullable',
             'status' => 'nullable',
             'keluhan' => 'required',
-            'nama_anak' => 'required',
-            'umur_anak' => 'required',
+            'bayi_id' => 'required',
+            'isVerif' => 'required',
         ]);
 
         try{
@@ -58,8 +58,8 @@ class PendaftaranController extends Controller
                 'jam_pendaftaran' => $request->jam_pendaftaran,
                 'status' => 'Menunggu Konfirmasi',
                 'keluhan' => $request->keluhan,
-                'nama_anak' => $request->nama_anak,
-                'umur_anak' => $request->umur_anak,
+                'bayi_id' => $request->bayi_id,
+                'isVerif' => false,
             ]);
 
             return $this->apiResponse('Data berhasil disimpan', $pendaftaran);
@@ -102,14 +102,14 @@ class PendaftaranController extends Controller
             'jam_pendaftaran' => 'nullable',
             'status' => 'nullable',
             'keluhan' => 'nullable',
-            'nama_anak' => 'nullable',
-            'umur_anak' => 'nullable',
+            'bayi_id' => 'nullable',
+            'isVerif' => 'nullable',
         ]);
 
         try{
             $pendaftaran = Pendaftaran::find($id);
             $pendaftaran->update($request->only([
-                'ibu_id', 'bidan_id', 'pelayanan_id', 'tanggal_pendaftaran', 'jam_pendaftaran', 'status', 'keluhan', 'nama_anak', 'umur_anak', 'status'
+                'ibu_id', 'bidan_id', 'pelayanan_id', 'tanggal_pendaftaran', 'jam_pendaftaran', 'status', 'keluhan', 'nama_anak', 'umur_anak', 'status', 'bayi_id', 'isVerif'
             ]));
             return $this->apiResponse('Data berhasil disimpan', $pendaftaran);
         }

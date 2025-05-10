@@ -11,12 +11,12 @@ class Pendaftaran extends Model
         'ibu_id',
         'bidan_id',
         'pelayanan_id',
+        'bayi_id',
         'tanggal_pendaftaran',
         'jam_pendaftaran',
         'status',
         'keluhan',
-        'nama_anak',
-        'umur_anak',
+        'isVerif',
     ];
 
     public function pelayanan(){

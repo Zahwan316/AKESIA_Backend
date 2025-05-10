@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_pemeriksaan_umum', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
             $table->string('bentuk_tubuh');
             $table->foreignId('kesadaran_id')->constrained('Ref_Kesadaran');
             $table->string('mata');

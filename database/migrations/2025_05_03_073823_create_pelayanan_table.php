@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('jenis_layanan_id')->constrained('jenis_layanans')->onDelete('cascade');
             $table->foreignId('form_id')->constained('Ref_jenis_form');
             $table->string('nama')->nullable();
-            $table->integer('harga');
-            $table->integer('kuantitas');
+            $table->integer('harga')->nullable();
+            //$table->integer('kuantitas');
             $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();

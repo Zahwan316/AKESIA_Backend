@@ -48,6 +48,7 @@ class PemeriksaanUmum extends Controller
             'genetalia' => 'required',
             'tinggi_badan' => 'required|integer',
             'berat_badan' => 'required|numeric',
+            'pendaftaran_id' => 'required'
         ]);
 
         try{
@@ -63,13 +64,14 @@ class PemeriksaanUmum extends Controller
                 'suhu_badan',
                 'genetalia',
                 'tinggi_badan',
-                'berat_badan'
+                'berat_badan',
+                'pendaftaran_id'
             ]));
 
             return $this->apiResponse('Data berhasil dibuat', $data);
         }
         catch(\Exception $e){
-
+            return $this->apiResponse( $e->getMessage(), '', 500 ,true);
         }
     }
 
@@ -95,6 +97,45 @@ class PemeriksaanUmum extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validate = $request->validate([
+            'bentuk_tubuh' => 'required',
+            'kesadaran_id' => 'required',
+            'mata' => 'required',
+            'leher' => 'required',
+            'payudara' => 'required',
+            'paru' => 'required',
+            'jantung' => 'required',
+            'hati' => 'required',
+            'suhu_badan' => 'required',
+            'genetalia' => 'required',
+            'tinggi_badan' => 'required|integer',
+            'berat_badan' => 'required|numeric',
+            'pendaftaran_id' => 'required'
+        ]);
+
+        try{
+            $data = Form_pemeriksaan_umum::find($id);
+            $data->update($request->only([
+                'bentuk_tubuh',
+                'kesadaran_id',
+                'mata',
+                'leher',
+                'payudara',
+                'paru',
+                'jantung',
+                'hati',
+                'suhu_badan',
+                'genetalia',
+                'tinggi_badan',
+                'berat_badan',
+                'pendaftaran_id'
+            ]));
+
+            return $this->apiResponse('Data berhasil diubah', $data);
+        }
+        catch(\Exception $e){
+            return $this->apiResponse( $e->getMessage(), '', 500 ,true);
+        }
     }
 
     /**

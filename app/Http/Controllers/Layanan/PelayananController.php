@@ -45,13 +45,14 @@ class PelayananController extends Controller
             'jenis_layanan_id' => 'required',
             'nama' => 'required',
             'harga' => 'required',
-            'kuantitas' => 'required',
+            //'kuantitas' => 'required',
             'keterangan' => 'required',
+            'form_id' => 'required',
         ]);
 
         try{
             Pelayanan::create($request->only([
-                'jenis_layanan_id', 'nama', 'kuantitas', 'keterangan', 'harga'
+                'jenis_layanan_id', 'nama', /* 'kuantitas', */ 'keterangan', 'harga', 'form_id'
             ]));
             return response()->json(['message' => 'Data berhasil disimpan', 'status_code' => 201], 201);
         }
@@ -92,14 +93,15 @@ class PelayananController extends Controller
             'jenis_layanan_id' => 'nullable',
             'nama' => 'nullable',
             'harga' => 'nullable',
-            'kuantitas' => 'nullable',
+            //'kuantitas' => 'nullable',
             'keterangan' => 'nullable',
+            'form_id' => 'nullable'
         ]);
 
         try{
             $pelayanan = Pelayanan::find($id);
             $pelayanan->update($request->only([
-                'jenis_layanan_id', 'nama', 'kuantitas', 'keterangan', 'harga'
+                'jenis_layanan_id', 'nama', 'kuantitas', 'keterangan', 'harga', 'form_id'
             ]));
             return response()->json(['message' => 'Data berhasil disimpan', 'status_code' => 201], 201);
         }

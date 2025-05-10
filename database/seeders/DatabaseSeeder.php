@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
             PendidikanSeeder::class,
             JenisFormSeeder::class,
             BayiSeeder::class,
+            TambahanLayananSeed::class,
             // Tambahkan seeder lain di sini
         ]);
 

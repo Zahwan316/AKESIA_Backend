@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Bayi\BayiController;
 use App\Http\Controllers\Bidan\BidanController;
+use App\Http\Controllers\Form\PemeriksaanLab;
 use App\Http\Controllers\Ibu\IbuController;
 use App\Http\Controllers\Layanan\JenisPelayananController;
 use App\Http\Controllers\Layanan\PelayananController;
@@ -59,6 +60,7 @@ Route::prefix('referensi')->middleware('auth:api')->group( function () {
 //form
 Route::prefix('form')->middleware('auth:api')->group(function(){
     Route::resource('pemeriksaan_umum', PemeriksaanUmum::class);
+    Route::resource('pemeriksaan_lab', PemeriksaanLab::class);
 });
 
 Route::get("/", function () {
