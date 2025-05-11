@@ -1,12 +1,20 @@
 <?php
 
+use App\Http\Controllers\Form\KesimpulanIbuNifas;
+use App\Http\Controllers\Form\PelayananIbuBersalinController;
+use App\Http\Controllers\Form\PelayananIbuNifasController;
 use App\Http\Controllers\Form\PemeriksaanUmum;
+use App\Http\Controllers\Form\RiwayatKehamilanSekarangController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Bayi\BayiController;
 use App\Http\Controllers\Bidan\BidanController;
+use App\Http\Controllers\Form\BayiSaatLahirController;
+use App\Http\Controllers\Form\PelayananBayiController;
 use App\Http\Controllers\Form\PemeriksaanLab;
+use App\Http\Controllers\Form\PengawasanMinumTabletController;
+use App\Http\Controllers\Form\RiwayatKehamilanSebelumnyaController;
 use App\Http\Controllers\Ibu\IbuController;
 use App\Http\Controllers\Layanan\JenisPelayananController;
 use App\Http\Controllers\Layanan\PelayananController;
@@ -61,6 +69,14 @@ Route::prefix('referensi')->middleware('auth:api')->group( function () {
 Route::prefix('form')->middleware('auth:api')->group(function(){
     Route::resource('pemeriksaan_umum', PemeriksaanUmum::class);
     Route::resource('pemeriksaan_lab', PemeriksaanLab::class);
+    Route::resource('pengawasan_tablet', PengawasanMinumTabletController::class);
+    Route::resource('pelayanan_bayi', PelayananBayiController::class);
+    Route::resource('pelayanan_ibu_nifas', PelayananIbuNifasController::class);
+    Route::resource('kesimpulan_ibu_nifas', KesimpulanIbuNifas::class);
+    Route::resource('pelayanan_ibu_bersalin', PelayananIbuBersalinController::class);
+    Route::resource('bayi_saat_lahir', BayiSaatLahirController::class);
+    Route::resource('riwayat_kehamilan_sebelumnya', RiwayatKehamilanSebelumnyaController::class);
+    Route::resource('riwayat_kehamilan_sekarang', RiwayatKehamilanSekarangController::class);
 });
 
 Route::get("/", function () {
