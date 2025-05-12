@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('ibu_id')->constrained()->cascadeOnDelete();
             $table->foreignId('bidan_id')->nullable()->constrained('bidans')->cascadeOnDelete();
-            $table->foreignId('bayi_id')->contarained('bayis');
+            $table->foreignId('bayi_id')->nullable()->constrained('bayis')->cascadeOnDelete();
             $table->foreignId('pelayanan_id')->constrained();
             $table->timestamp('tanggal_pendaftaran');
             $table->time('jam_pendaftaran')->nullable();
+            $table->time('jam_ditentukan')->nullable();
             $table->boolean('isVerif');
             $table->string('status', 24);
             $table->text('keluhan');

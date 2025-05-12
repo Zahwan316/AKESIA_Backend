@@ -27,7 +27,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 //Auth
-Route::post('/login', [AuthController::class,'login'])->name('login');
+Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class,'register'])->name('register');
 Route::get('/checkiscompleteprofile', [AuthController::class,'checkIsCompleteProfile']);
 Route::middleware('auth:api')->get('/checktoken', [AuthController::class,'checkToken']);

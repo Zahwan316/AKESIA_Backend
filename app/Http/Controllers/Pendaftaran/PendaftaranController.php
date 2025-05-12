@@ -17,7 +17,7 @@ class PendaftaranController extends Controller
     public function index()
     {
         //
-        $pendaftaran = Pendaftaran::with('pelayanan')->paginate();
+        $pendaftaran = Pendaftaran::with('pelayanan')->get();
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 
@@ -41,10 +41,11 @@ class PendaftaranController extends Controller
             'pelayanan_id' => 'required',
             'tanggal_pendaftaran' => 'required',
             'jam_pendaftaran' => 'nullable',
+            'jam_ditentukan' => 'nullable',
             'status' => 'nullable',
             'keluhan' => 'required',
-            'bayi_id' => 'required',
-            'isVerif' => 'required',
+            'bayi_id' => 'nullable',
+            'isVerif' => 'nullable',
         ]);
 
         try{
@@ -76,7 +77,7 @@ class PendaftaranController extends Controller
     public function show(string $id)
     {
         //
-        $pendaftaran = Pendaftaran::find($id)::with(['pelayanan', 'ibu.user'])->first();
+        $pendaftaran = Pendaftaran::find($id)::with(['pelayanan', 'ibu.user']);
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 

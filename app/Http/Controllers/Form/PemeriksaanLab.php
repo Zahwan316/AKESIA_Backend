@@ -71,6 +71,8 @@ class PemeriksaanLab extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_pemeriksaan_lab::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**

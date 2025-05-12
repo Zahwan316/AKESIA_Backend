@@ -63,6 +63,8 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_riwayat_kehamilan_sebelumnya::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**

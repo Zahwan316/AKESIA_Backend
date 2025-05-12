@@ -68,6 +68,8 @@ class PelayananBayiController extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_Pelayanan_Bayi::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**

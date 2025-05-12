@@ -81,6 +81,8 @@ class PemeriksaanUmum extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_pemeriksaan_umum::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**

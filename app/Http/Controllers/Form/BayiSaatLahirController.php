@@ -60,6 +60,8 @@ class BayiSaatLahirController extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_bayi_saat_lahir::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**

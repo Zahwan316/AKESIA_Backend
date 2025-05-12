@@ -14,6 +14,7 @@ class Pendaftaran extends Model
         'bayi_id',
         'tanggal_pendaftaran',
         'jam_pendaftaran',
+        'jam_ditentukan',
         'status',
         'keluhan',
         'isVerif',

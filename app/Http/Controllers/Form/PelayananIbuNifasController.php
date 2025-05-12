@@ -74,6 +74,8 @@ class PelayananIbuNifasController extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_pelayanan_ibu_nifas::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**

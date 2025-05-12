@@ -62,6 +62,8 @@ class PengawasanMinumTabletController extends Controller
     public function show(string $id)
     {
         //
+        $data = Form_pengawasan_minum_tablet::find($id);
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**
