@@ -21,5 +21,5 @@ Route::middleware(['web', 'auth:web'])->prefix("admin")->group(function () {
     })->name('admin.dashboard');
 
     Route::resource('pendaftaran', PendaftaranWebController::class);
-    Route::post('verifikasi/pendaftaran/{id}', [PendaftaranWebController::class, 'verifikasi'])->name('pendaftaran.verifikasi');
+    Route::put('verifikasi/pendaftaran/{id}', [PendaftaranWebController::class, 'verifikasi'])->name('pendaftaran.verifikasi');
 });

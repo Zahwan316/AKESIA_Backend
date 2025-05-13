@@ -33,7 +33,7 @@
                     <td>{{$pendaftaran->tanggal_pendaftaran}}</td>
                     <td>{{$pendaftaran->keluhan}}</td>
                     <td>
-                        <div class='{{$pendaftaran->isVerif === 1 ? 'bg-sucess' : 'bg-danger'}} text-white p-1 rounded'>
+                        <div class='{{$pendaftaran->isVerif === 1 ? 'bg-success' : 'bg-danger'}} text-white p-1 rounded'>
                             {{$pendaftaran->isVerif === 1 ? 'Sudah Diverifikasi' : 'Belum Diverifikasi'}}
                         </div>
                     </td>
@@ -51,6 +51,8 @@
                         {{-- <button class='btn btn-danger'>Tolak</button> --}}
                         <div>
                             <form action='{{route('pendaftaran.verifikasi', $pendaftaran->id)}}' method="POST" style='display: block;'>
+                                @method('PUT')
+                                @csrf
                                 <button class='btn btn-success' type='submit'>Verifikasi</button>
                             </form>
                         </div>

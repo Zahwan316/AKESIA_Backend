@@ -27,5 +27,8 @@ class Pendaftaran extends Model
     public function ibu(){
         return $this->belongsTo(Ibu::class);
     }
+    public function bayi(){
+        return $this->belongsTo(Bayi::class);
+    }
 
 }

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>ASKESIA - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="bg-pink">
+<body class="bg-pink" style="background-color: #FF90BB">
 
     <div class="container">
 
@@ -35,8 +35,8 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image d-flex justify-content-center align-items-center w-50">
-                                <img src='{{asset('img/LogoBidanBunda.png')}}' class='w-50'/>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image " style='display: flex; justify-content: center; align-items: center;'>
+                                <img src='{{asset('img/LogoBidanBunda.png')}}' class='mx-auto my-auto d-block' style='max-width: 50%;'/>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">

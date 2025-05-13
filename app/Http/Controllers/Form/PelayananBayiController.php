@@ -39,7 +39,7 @@ class PelayananBayiController extends Controller
             'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
             'nama_bayi' => 'required|string|max:255',
             'umur_bayi' => 'required|integer',
-            'jenis_kelamin_bayi' => 'required|string|in:laki-laki,perempuan',
+            'jenis_kelamin_bayi' => 'required|string',
             'booking_layanan' => 'required|string|max:255',
             'keterangan_kondisi_bayi' => 'required|string|max:255',
             'tambahan_layanan_id' => 'nullable|integer|exists:tambahan_layanans,id'
@@ -90,10 +90,10 @@ class PelayananBayiController extends Controller
             'pendaftaran_id' => 'nullable|exists:pendaftarans,id',
             'nama_bayi' => 'nullable|string|max:255',
             'umur_bayi' => 'nullable|integer|min:0',
-            'jenis_kelamin_bayi' => 'nullable|string|max:2',
+            'jenis_kelamin_bayi' => 'nullable|string',
             'booking_layanan' => 'nullable|string|max:255',
             'keterangan_kondisi_bayi' => 'nullable|string',
-            'tambahan_layanan_id' => 'nullable|exists:tambahan_layanan,id',
+            'tambahan_layanan_id' => 'nullable|exists:tambahan_layanans,id',
         ]);
 
         try{
@@ -120,5 +120,10 @@ class PelayananBayiController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_Pelayanan_Bayi::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

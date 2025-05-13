@@ -18,6 +18,7 @@ use App\Http\Controllers\Form\RiwayatKehamilanSebelumnyaController;
 use App\Http\Controllers\Ibu\IbuController;
 use App\Http\Controllers\Layanan\JenisPelayananController;
 use App\Http\Controllers\Layanan\PelayananController;
+use App\Http\Controllers\Layanan\TambahanLayananController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\Ref\ReferensiController;
 use App\Models\Form_pemeriksaan_umum;
@@ -53,6 +54,7 @@ Route::middleware('auth:api')->get('/getUserAnak', [BayiController::class,'getAn
 route::prefix('layanan')->middleware('auth:api')->group( function () {
     Route::resource('jenis_pelayanan', JenisPelayananController::class);
     Route::resource('pelayanan', PelayananController::class);
+    Route::resource('tambahan_layanan', TambahanLayananController::class);
 });
 
 //Referensi
@@ -71,6 +73,7 @@ Route::prefix('form')->middleware('auth:api')->group(function(){
     Route::resource('pemeriksaan_lab', PemeriksaanLab::class);
     Route::resource('pengawasan_tablet', PengawasanMinumTabletController::class);
     Route::resource('pelayanan_bayi', PelayananBayiController::class);
+    Route::Get('pelayanan_bayi/show_by_pendaftaran/{id}', [PelayananBayiController::class, 'showFormByPendaftaran']);
     Route::resource('pelayanan_ibu_nifas', PelayananIbuNifasController::class);
     Route::resource('kesimpulan_ibu_nifas', KesimpulanIbuNifas::class);
     Route::resource('pelayanan_ibu_bersalin', PelayananIbuBersalinController::class);
