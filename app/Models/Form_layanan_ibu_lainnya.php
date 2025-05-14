@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Form_layanan_ibu_lainnya extends Model
+{
+    //
+    protected $table = "form_layanan_ibu_lainnya";
+    protected $fillable = [
+        'pendaftaran_id',
+        'nama_ibu',
+        'umur_ibu',
+        'booking_layanan',
+        'catatan_soap',
+        'keterangan',
+    ];
+}

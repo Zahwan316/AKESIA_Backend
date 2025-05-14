@@ -92,11 +92,11 @@ class PemeriksaanLab extends Controller
         $validate = $request->validate([
             //'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
             'tanggal_pemeriksaan' => 'nullable|date',
-            'jam_pemeriksaan' => 'nullable|date_format:H:i',
+            'jam_pemeriksaan' => 'nullable',
             'nama' => 'nullable|string|max:255',
             'hasil' => 'nullable|string|max:255',
             'tanggal_pelayanan' => 'nullable|date',
-            'jam_pelayanan' => 'nullable|date_format:H:i',
+            'jam_pelayanan' => 'nullable',
             'soap' => 'nullable|string|max:255',
             'penatalaksanaan' => 'nullable|string|max:255'
         ]);
@@ -127,5 +127,10 @@ class PemeriksaanLab extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_pemeriksaan_lab::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

@@ -17,7 +17,7 @@ class PendaftaranController extends Controller
     public function index()
     {
         //
-        $pendaftaran = Pendaftaran::with('pelayanan', 'bayi', 'ibu.user')->get();
+        $pendaftaran = Pendaftaran::with('pelayanan', 'bayi', 'ibu.user')->orderBy('created_at', 'desc')->get();
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 

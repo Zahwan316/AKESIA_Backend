@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Form;
 
 use App\apiResponse;
 use App\Http\Controllers\Controller;
-use App\Models\Form_pengawasan_minum_tablet;
-use Faker\Provider\ar_EG\Person;
+use App\Models\Form_layanan_ibu_lainnya;
 use Illuminate\Http\Request;
 
-class PengawasanMinumTabletController extends Controller
+class FormLayananIbuLainnyaController extends Controller
 {
     use apiResponse;
     /**
@@ -17,8 +16,8 @@ class PengawasanMinumTabletController extends Controller
     public function index()
     {
         //
-        $data = Form_pengawasan_minum_tablet::all();
-        return $this->apiResponse('Data berhasil diambil', $data);
+        $data = Form_layanan_ibu_lainnya::all();
+        return $this->apiResponse(  'Data berhasil diambil',$data);
     }
 
     /**
@@ -37,22 +36,26 @@ class PengawasanMinumTabletController extends Controller
         //
         $validate = $request->validate([
             'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
-            'bulan_ke' => 'required|integer|between:1,12',
-            'tanggal' => 'required|date',
-            'jam' => 'required',
+            'nama_ibu' => 'required|string|max:120',
+            'umur_ibu' => 'required|integer|between:1,100',
+            'booking_layanan' => 'required|string|max:255',
+            'catatan_soap' => 'nullable|string|max:255',
+            'keterangan' => 'nullable|string|max:255',
         ]);
 
         try{
-            $data = Form_pengawasan_minum_tablet::create($request->only([
+            $data = Form_layanan_ibu_lainnya::create($request->only([
                 'pendaftaran_id',
-                'bulan_ke',
-                'tanggal',
-                'jam'
+                'nama_ibu',
+                'umur_ibu',
+                'booking_layanan',
+                'catatan_soap',
+                'keterangan',
             ]));
             return $this->apiResponse('Data berhasil ditambahkan', $data);
         }
         catch(\Exception $e){
-            return $this->apiResponse('Gagal menambahkan data', $e->getMessage(), 500, true);
+            return $this->apiResponse($e->getMessage(),'',500, true );
         }
     }
 
@@ -62,8 +65,6 @@ class PengawasanMinumTabletController extends Controller
     public function show(string $id)
     {
         //
-        $data = Form_pengawasan_minum_tablet::find($id);
-        return $this->apiResponse('Data berhasil diambil', $data);
     }
 
     /**
@@ -72,6 +73,8 @@ class PengawasanMinumTabletController extends Controller
     public function edit(string $id)
     {
         //
+
+
     }
 
     /**
@@ -82,23 +85,27 @@ class PengawasanMinumTabletController extends Controller
         //
         $validate = $request->validate([
             'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
-            'bulan_ke' => 'nullable|integer|between:1,12',
-            'tanggal' => 'nullable|date',
-            'jam' => 'nullable',
+            'nama_ibu' => 'nullable|string|max:120',
+            'umur_ibu' => 'nullable|integer|between:1,100',
+            'booking_layanan' => 'nullable|string|max:255',
+            'catatan_soap' => 'nullable|string|max:255',
+            'keterangan' => 'nullable|string|max:255',
         ]);
 
         try{
-            $data = Form_pengawasan_minum_tablet::find($id);
+            $data = Form_layanan_ibu_lainnya::findOrFail($id);
             $data->update($request->only([
                 'pendaftaran_id',
-                'bulan_ke',
-                'tanggal',
-                'jam'
+                'nama_ibu',
+                'umur_ibu',
+                'booking_layanan',
+                'catatan_soap',
+                'keterangan',
             ]));
             return $this->apiResponse('Data berhasil diubah', $data);
         }
         catch(\Exception $e){
-            return $this->apiResponse('Gagal mengubah data', $e->getMessage(), 500, true);
+            return $this->apiResponse($e->getMessage(),'',500, true );
         }
     }
 
@@ -108,10 +115,5 @@ class PengawasanMinumTabletController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function showFormByPendaftaran(string $id){
-        $data = Form_pengawasan_minum_tablet ::where('pendaftaran_id', $id)->first();
-        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

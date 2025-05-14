@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Form;
 use App\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Form_pemeriksaan_umum;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class PemeriksaanUmum extends Controller
@@ -48,10 +49,18 @@ class PemeriksaanUmum extends Controller
             'genetalia' => 'required',
             'tinggi_badan' => 'required|integer',
             'berat_badan' => 'required|numeric',
-            'pendaftaran_id' => 'required'
+            'pendaftaran_id' => 'required',
+            'tanggal_kontrol_kembali' => 'nullable',
+            'user_id' => 'required'
         ]);
 
         try{
+            $notif = Notification::create([
+                'user_id' => $request->user_id,
+                'title' => 'Haloo mak',
+                'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
+            ]);
+
             $data = Form_pemeriksaan_umum::create($request->only([
                 'bentuk_tubuh',
                 'kesadaran_id',
@@ -65,7 +74,8 @@ class PemeriksaanUmum extends Controller
                 'genetalia',
                 'tinggi_badan',
                 'berat_badan',
-                'pendaftaran_id'
+                'pendaftaran_id',
+                'tanggal_kontrol_kembali'
             ]));
 
             return $this->apiResponse('Data berhasil dibuat', $data);
@@ -112,10 +122,17 @@ class PemeriksaanUmum extends Controller
             'genetalia' => 'required',
             'tinggi_badan' => 'required|integer',
             'berat_badan' => 'required|numeric',
-            'pendaftaran_id' => 'required'
+            'pendaftaran_id' => 'required',
+            'tanggal_kontrol_kembali' => 'nullable'
         ]);
 
         try{
+            $notif = Notification::create([
+                'user_id' => $request->user_id,
+                'title' => 'Haloo mak',
+                'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
+            ]);
+            
             $data = Form_pemeriksaan_umum::find($id);
             $data->update($request->only([
                 'bentuk_tubuh',
@@ -130,7 +147,8 @@ class PemeriksaanUmum extends Controller
                 'genetalia',
                 'tinggi_badan',
                 'berat_badan',
-                'pendaftaran_id'
+                'pendaftaran_id',
+                'tanggal_kontrol_kembali'
             ]));
 
             return $this->apiResponse('Data berhasil diubah', $data);
@@ -146,5 +164,10 @@ class PemeriksaanUmum extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_pemeriksaan_umum::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }
