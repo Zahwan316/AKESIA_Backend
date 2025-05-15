@@ -19,6 +19,7 @@ class JenisFormSeeder extends Seeder
             ['name' => 'Pelayanan Bersalin'],
             ['name' => 'Pelayanan Nifas'],
             ['name' => 'Pelayanan Bayi'],
+            ['name' => 'Pelayanan Lainnya'],
         ];
 
         DB::table('Ref_jenis_form')->insert($data);

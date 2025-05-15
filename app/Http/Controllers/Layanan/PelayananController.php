@@ -47,7 +47,7 @@ class PelayananController extends Controller
             'harga' => 'required',
             //'kuantitas' => 'required',
             'keterangan' => 'required',
-            'form_id' => 'required',
+            //'form_id' => 'required',
         ]);
 
         try{

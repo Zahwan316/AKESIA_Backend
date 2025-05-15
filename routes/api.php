@@ -20,6 +20,7 @@ use App\Http\Controllers\Form\RiwayatKehamilanSebelumnyaController;
 use App\Http\Controllers\Ibu\IbuController;
 use App\Http\Controllers\Layanan\JenisPelayananController;
 use App\Http\Controllers\Layanan\PelayananController;
+use App\Http\Controllers\Layanan\PelayananFormItemController;
 use App\Http\Controllers\Layanan\TambahanLayananController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\Ref\ReferensiController;
@@ -55,6 +56,7 @@ Route::middleware('auth:api')->get('/getUserAnak', [BayiController::class,'getAn
 route::prefix('layanan')->middleware('auth:api')->group( function () {
     Route::resource('jenis_pelayanan', JenisPelayananController::class);
     Route::resource('pelayanan', PelayananController::class);
+    Route::resource('pelayanan_form_item', PelayananFormItemController::class);
     Route::resource('tambahan_layanan', TambahanLayananController::class);
 });
 
@@ -85,6 +87,8 @@ Route::prefix('form')->middleware('auth:api')->group(function(){
     Route::Get('pemeriksaan_umum/show_by_pendaftaran/{id}', [PemeriksaanUmum::class, 'showFormByPendaftaran']);
     Route::Get('pemeriksaan_lab/show_by_pendaftaran/{id}', [PemeriksaanLab::class, 'showFormByPendaftaran']);
     Route::Get('pengawasan_tablet/show_by_pendaftaran/{id}', [PengawasanMinumTabletController::class, 'showFormByPendaftaran']);
+    Route::Get('pelayanan_ibu_bersalin/show_by_pendaftaran/{id}', [PelayananIbuBersalinController::class, 'showFormByPendaftaran']);
+    Route::Get('bayi_saat_lahir/show_by_pendaftaran/{id}', [BayiSaatLahirController::class, 'showFormByPendaftaran']);
 });
 
 //notification

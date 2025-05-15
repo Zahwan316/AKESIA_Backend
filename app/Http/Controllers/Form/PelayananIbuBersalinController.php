@@ -82,7 +82,7 @@ class PelayananIbuBersalinController extends Controller
         $validate = $request->validate([
             'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
             'tanggal_persalinan' => 'nullable|date',
-            'jam_lahir' => 'nullable|date_format:H:i',
+            'jam_lahir' => 'nullable|date_format:H:i:s',
             'umur_kehamilan' => 'nullable|integer|between:1,42',
             'penolong_persalinan' => 'nullable|string',
             'cara_persalinan' => 'nullable|string',
@@ -117,5 +117,10 @@ class PelayananIbuBersalinController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_pelayanan_ibu_bersalin::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }
