@@ -132,7 +132,7 @@ class PendaftaranController extends Controller
 
     public function getCurrUserPendaftaran(){
         $ibu = Ibu::where('user_id', auth()->guard()->user()->id)->first();
-        $data = Pendaftaran::where('ibu_id', $ibu->id)->with('pelayanan')->get();
+        $data = Pendaftaran::where('ibu_id', $ibu->id)->with('pelayanan')->orderBy('created_at', 'desc')->get();
         //dd($data);
 
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);

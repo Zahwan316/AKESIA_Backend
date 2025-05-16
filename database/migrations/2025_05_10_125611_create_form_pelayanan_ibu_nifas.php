@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('klasifikasi_nifas_3')->nullable();
             $table->string('tindakan_nifas_3')->nullable();
             $table->date('tanggal_nifas_3')->nullable();
+            $table->string('klasifikasi_nifas_4')->nullable();
+            $table->string('tindakan_nifas_4')->nullable();
+            $table->date('tanggal_nifas_4')->nullable();
             $table->timestamps();
         });
     }

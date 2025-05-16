@@ -15,7 +15,7 @@ class PelayananController extends Controller
     public function index(Request $request)
     {
         //
-        $pelayananWithJenisId = $request->query('jenis_pelayanan_id');
+        $pelayananWithJenisId = $request->query('jenis_layanan_id');
 
         if($pelayananWithJenisId){
             $data = Pelayanan::where('jenis_layanan_id', $pelayananWithJenisId)->get();

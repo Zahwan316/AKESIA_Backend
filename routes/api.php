@@ -89,6 +89,9 @@ Route::prefix('form')->middleware('auth:api')->group(function(){
     Route::Get('pengawasan_tablet/show_by_pendaftaran/{id}', [PengawasanMinumTabletController::class, 'showFormByPendaftaran']);
     Route::Get('pelayanan_ibu_bersalin/show_by_pendaftaran/{id}', [PelayananIbuBersalinController::class, 'showFormByPendaftaran']);
     Route::Get('bayi_saat_lahir/show_by_pendaftaran/{id}', [BayiSaatLahirController::class, 'showFormByPendaftaran']);
+    Route::Get('pelayanan_ibu_nifas/show_by_pendaftaran/{id}', [PelayananIbuNifasController::class, 'showFormByPendaftaran']);
+    Route::Get('kesimpulan_ibu_nifas/show_by_pendaftaran/{id}', [KesimpulanIbuNifas::class, 'showFormByPendaftaran']);
+    Route::Get('layanan_ibu_lainnya/show_by_pendaftaran/{id}', [FormLayananIbuLainnyaController::class, 'showFormByPendaftaran']);
 });
 
 //notification

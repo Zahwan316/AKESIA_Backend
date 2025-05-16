@@ -13,9 +13,8 @@ class PelayananIbuNifasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
         $data = Form_pelayanan_ibu_nifas::all();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
@@ -46,6 +45,9 @@ class PelayananIbuNifasController extends Controller
             'klasifikasi_nifas_3' => 'nullable|string|max:255',
             'tindakan_nifas_3' => 'nullable|string|max:255',
             'tanggal_nifas_3' => 'nullable|date',
+            'klasifikasi_nifas_4' => 'nullable|string|max:255',
+            'tindakan_nifas_4' => 'nullable|string|max:255',
+            'tanggal_nifas_4' => 'nullable|date',
         ]);
 
         try{
@@ -60,6 +62,9 @@ class PelayananIbuNifasController extends Controller
                 'klasifikasi_nifas_3',
                 'tindakan_nifas_3',
                 'tanggal_nifas_3',
+                'klasifikasi_nifas_4',
+                'tindakan_nifas_4',
+                'tanggal_nifas_4',
             ]));
             return $this->apiResponse('Data berhasil disimpan', $data);
         }
@@ -104,6 +109,10 @@ class PelayananIbuNifasController extends Controller
             'klasifikasi_nifas_3' => 'nullable|string|max:255',
             'tindakan_nifas_3' => 'nullable|string|max:255',
             'tanggal_nifas_3' => 'nullable|date',
+            'klasifikasi_nifas_4' => 'nullable|string|max:255',
+            'tindakan_nifas_4' => 'nullable|string|max:255',
+            'tanggal_nifas_4' => 'nullable|date',
+
         ]);
 
         try{
@@ -119,6 +128,9 @@ class PelayananIbuNifasController extends Controller
                 'klasifikasi_nifas_3',
                 'tindakan_nifas_3',
                 'tanggal_nifas_3',
+                'klasifikasi_nifas_4',
+                'tindakan_nifas_4',
+                'tanggal_nifas_4',
             ]));
             return $this->apiResponse('Data berhasil diubah', $data);
         }
@@ -133,5 +145,10 @@ class PelayananIbuNifasController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_pelayanan_ibu_nifas::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

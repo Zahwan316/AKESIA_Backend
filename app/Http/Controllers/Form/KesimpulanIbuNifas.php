@@ -43,7 +43,13 @@ class KesimpulanIbuNifas extends Controller
         ]);
 
         try{
-
+            $data = Form_kesimpulan_ibu_nifas::create($request->only([
+                'pendaftaran_id',
+                'keadaan_ibu',
+                'komplikasi_nifas',
+                'keadaan_bayi',
+            ]));
+            return $this->apiResponse('Data berhasil disimpan', $data);
         }
         catch(\Exception $e){
             return $this->apiResponse($e->getMessage(),'',500, true );
@@ -75,7 +81,7 @@ class KesimpulanIbuNifas extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
             'keadaan_ibu' => 'nullable|string|max:255',
             'komplikasi_nifas' => 'nullable|string|max:255',
             'keadaan_bayi' => 'nullable|string|max:255',
@@ -103,5 +109,10 @@ class KesimpulanIbuNifas extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_kesimpulan_ibu_nifas::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

@@ -19,5 +19,8 @@ class Form_pelayanan_ibu_nifas extends Model
         'klasifikasi_nifas_3',
         'tindakan_nifas_3',
         'tanggal_nifas_3',
+        'klasifikasi_nifas_4',
+        'tindakan_nifas_4',
+        'tanggal_nifas_4',
     ];
 }
