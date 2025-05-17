@@ -146,4 +146,8 @@ class RiwayatKehamilanSekarangController extends Controller
     {
         //
     }
+    public function showFormByPendaftaran(string $id){
+        $data = Form_riwayat_kehamilan_sekarang::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
+    }
 }

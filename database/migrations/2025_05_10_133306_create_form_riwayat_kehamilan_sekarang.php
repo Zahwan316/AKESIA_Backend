@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
             $table->string('gravida');
             $table->string('partus');
-            $table->string('rr/rt');
+            $table->string('rr_rt');
             $table->date('hpl');
             $table->string('hpht');
             $table->enum('muntah', ['Biasa', 'Terus Menerus']);
@@ -32,7 +32,8 @@ return new class extends Migration
                 'Hati',
                 'Psikosis',
                 'Ginjal',
-                'Malaria'
+                'Malaria',
+                'Tidak ada',
             ]);
             $table->enum('riwayat_penyakit_keluarga', [
                 'Kp',
@@ -42,13 +43,15 @@ return new class extends Migration
                 'Epilepsi',
                 'Gemeli',
                 'Psikosis',
-                'Cacat Bawaan'
+                'Cacat Bawaan',
+                'Tidak ada'
             ]);
             $table->enum('kebiasaan', [
                 'Merokok',
                 'Munuman keras',
                 'Narkotik',
-                'Obat penenang'
+                'Obat penenang',
+                'Kebiasaan normal'
             ]);
             $table->enum('keluhan', [
                 'Flour Albus',

@@ -40,7 +40,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
             'anak_ke' => 'required|integer',
             'apiah' => 'required|string',
             'umur_anak' => 'required|integer',
-            'p/l' => 'required|stringL',
+            'p_l' => 'required|string',
             'bbl' => 'required|integer',
             'cara_persalinan' => 'required|string',
             'penolong' => 'required|string',
@@ -84,7 +84,8 @@ class RiwayatKehamilanSebelumnyaController extends Controller
         $validate = $request->validate([
             'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
             'umur_anak' => 'nullable|integer',
-            'p/l' => 'nullable|string',
+            'apiah' => 'nullable|string',
+            'p_l' => 'nullable|string',
             'bbl' => 'nullable|integer',
             'cara_persalinan' => 'nullable|string',
             'penolong' => 'nullable|string',
@@ -97,7 +98,8 @@ class RiwayatKehamilanSebelumnyaController extends Controller
             $data->update($request->only([
                 'pendaftaran_id',
                 'umur_anak',
-                'p/l',
+                'apiah',
+                'p_l',
                 'bbl',
                 'cara_persalinan',
                 'penolong',
@@ -117,5 +119,10 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showFormByPendaftaran(string $id){
+        $data = Form_riwayat_kehamilan_sebelumnya::where('pendaftaran_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

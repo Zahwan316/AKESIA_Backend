@@ -13,7 +13,7 @@ class Form_riwayat_kehamilan_sebelumnya extends Model
         'anak_ke',
         'apiah',
         'umur_anak',
-        'p/l',
+        'p_l',
         'bbl',
         'cara_persalinan',
         'penolong',

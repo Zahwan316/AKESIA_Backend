@@ -92,6 +92,8 @@ Route::prefix('form')->middleware('auth:api')->group(function(){
     Route::Get('pelayanan_ibu_nifas/show_by_pendaftaran/{id}', [PelayananIbuNifasController::class, 'showFormByPendaftaran']);
     Route::Get('kesimpulan_ibu_nifas/show_by_pendaftaran/{id}', [KesimpulanIbuNifas::class, 'showFormByPendaftaran']);
     Route::Get('layanan_ibu_lainnya/show_by_pendaftaran/{id}', [FormLayananIbuLainnyaController::class, 'showFormByPendaftaran']);
+    Route::Get('riwayat_kehamilan_sebelumnya/show_by_pendaftaran/{id}', [RiwayatKehamilanSebelumnyaController::class, 'showFormByPendaftaran']);
+    Route::Get('riwayat_kehamilan_sekarang/show_by_pendaftaran/{id}', [RiwayatKehamilanSekarangController::class, 'showFormByPendaftaran']);
 });
 
 //notification

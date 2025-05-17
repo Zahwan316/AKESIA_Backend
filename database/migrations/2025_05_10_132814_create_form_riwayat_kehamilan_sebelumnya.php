@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('anak_ke');
             $table->string('apiah');
             $table->integer('umur_anak');
-            $table->string('p/l');
+            $table->string('p_l');
             $table->string('bbl');
             $table->string('cara_persalinan');
             $table->string('penolong');
