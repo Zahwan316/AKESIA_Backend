@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ibu;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PendaftaranController extends Controller
 {
@@ -14,10 +15,24 @@ class PendaftaranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $pendaftaran = Pendaftaran::with('pelayanan', 'bayi', 'ibu.user')->orderBy('created_at', 'desc')->get();
+        $query = $request->query('tanggal');
+
+        if($query){
+            //$tanggal = Carbon::createFromFormat('d/m/Y', $query)->format('Y-m-d');
+            $pendaftaran = Pendaftaran::with('pelayanan', 'bayi', 'ibu.user')
+            ->whereDate('created_at', $query)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
+        else
+        {
+            $pendaftaran = Pendaftaran::with('pelayanan', 'bayi', 'ibu.user')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        }
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 
@@ -77,7 +92,7 @@ class PendaftaranController extends Controller
     public function show(string $id)
     {
         //
-        $pendaftaran = Pendaftaran::find($id)::with(['pelayanan', 'ibu.user']);
+        $pendaftaran = Pendaftaran::with(['pelayanan', 'ibu.user'])->find($id);
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 
