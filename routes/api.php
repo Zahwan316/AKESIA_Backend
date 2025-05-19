@@ -37,9 +37,10 @@ Route::middleware('auth:api')->get('/checktoken', [AuthController::class,'checkT
 
 //Ibu
 Route::prefix('ibu')->middleware('auth:api')->group( function (){
-    Route::Post('/lengkapidata', [IbuController::class,'LengkapiData']);
-    Route::Get('/getdataibu/{user_id}', [IbuController::class,'GetDataIbu']);
-    Route::Get('/getalldataibu', [IbuController::class,'GetAllDataIbu']);
+    Route::Post('lengkapidata', [IbuController::class,'LengkapiData']);
+    Route::Get('getdataibu/{user_id}', [IbuController::class,'GetDataIbu']);
+    Route::Get('getalldataibu', [IbuController::class,'GetAllDataIbu']);
+    Route::put('update/{id}', [IbuController::class,'UpdateData']);
 });
 
 //User
@@ -50,7 +51,6 @@ Route::middleware('auth:api')->resource('bayi', BayiController::class);
 
 //bayi
 Route::middleware('auth:api')->get('/getUserAnak', [BayiController::class,'getAnak']);
-
 
 //Layanan
 route::prefix('layanan')->middleware('auth:api')->group( function () {

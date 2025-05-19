@@ -72,4 +72,38 @@ class IbuController extends Controller
     }
 
     }
+
+    public function UpdateData(Request $request, string $id){
+        $validate = $request->validate([
+            'nik' => 'nullable|string|unique:ibus|size:16',
+            'golongan_darah' => 'nullable',
+            'tempat_lahir' => 'nullable',
+            'tanggal_lahir' => 'nullable',
+            'pendidikan' => 'nullable',
+            'pekerjaan' => 'nullable',
+            'alamat_domisili' => 'nullable',
+            'telepon' => 'nullable|unique:ibus',
+            'nama_lengkap' => 'nullable',
+            'berat_badan' => 'nullable',
+            'tinggi_badan' => 'nullable',
+            'usia_kehamilan' => 'nullable'
+        ]);
+
+        try{
+            $data = Ibu::findOrFail($id);
+            $data->update($request->only([
+                'nik', 'golongan_darah', 'tempat_lahir', 'tanggal_lahir',
+                'pendidikan', 'pekerjaan', 'alamat_domisili', 'telepon', 'user_id',
+                'berat_badan', 'tinggi_badan', 'usia_kehamilan'
+            ]));
+            return response()->json(['message' => 'Data berhasil disimpan', 'status_code' => 201], 201);
+        }
+        catch(\exception $e){
+            return response()->json([
+                'error' => 'Gagal menyimpan data',
+                'message' => $e->getMessage(),
+                'status_code' => 500
+            ], 500);
+        }
+    }
 }
