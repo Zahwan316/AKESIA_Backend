@@ -41,6 +41,7 @@ Route::prefix('ibu')->middleware('auth:api')->group( function (){
     Route::Get('getdataibu/{user_id}', [IbuController::class,'GetDataIbu']);
     Route::Get('getalldataibu', [IbuController::class,'GetAllDataIbu']);
     Route::put('update/{id}', [IbuController::class,'UpdateData']);
+    Route::put('getCurrIbu', [IbuController::class,'GetCurrIbu']);
 });
 
 //User

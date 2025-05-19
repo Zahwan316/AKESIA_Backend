@@ -19,6 +19,11 @@ class IbuController extends Controller
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 
+    public function GetCurrIbu(){
+        $data = Ibu::where("user_id",auth()->guard()->user()->id)->first();
+        return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
+    }
+
     //
     public function LengkapiData(Request $request){
         $validate = $request->validate([
