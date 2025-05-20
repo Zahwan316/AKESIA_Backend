@@ -36,7 +36,7 @@ class PengawasanMinumTabletController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'bulan_ke' => 'required|integer|between:1,12',
             'tanggal' => 'required|date',
             'jam' => 'required',
@@ -44,7 +44,7 @@ class PengawasanMinumTabletController extends Controller
 
         try{
             $data = Form_pengawasan_minum_tablet::create($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'bulan_ke',
                 'tanggal',
                 'jam'
@@ -81,7 +81,7 @@ class PengawasanMinumTabletController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'bulan_ke' => 'nullable|integer|between:1,12',
             'tanggal' => 'nullable|date',
             'jam' => 'nullable',
@@ -90,7 +90,7 @@ class PengawasanMinumTabletController extends Controller
         try{
             $data = Form_pengawasan_minum_tablet::find($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'bulan_ke',
                 'tanggal',
                 'jam'
@@ -111,7 +111,7 @@ class PengawasanMinumTabletController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_pengawasan_minum_tablet ::where('pendaftaran_id', $id)->first();
+        $data = Form_pengawasan_minum_tablet ::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

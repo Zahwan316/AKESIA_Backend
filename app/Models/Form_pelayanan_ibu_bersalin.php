@@ -9,7 +9,7 @@ class Form_pelayanan_ibu_bersalin extends Model
     //
     protected $table = "form_pelayanan_ibu_bersalin";
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'tanggal_persalinan',
         'jam_lahir',
         'umur_kehamilan',

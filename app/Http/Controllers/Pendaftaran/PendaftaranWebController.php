@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Pendaftaran;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bidan;
+use App\Models\Pemeriksaan;
 use App\Models\Pendaftaran;
 use Illuminate\Http\Request;
 
@@ -99,6 +100,20 @@ class PendaftaranWebController extends Controller
         $data = Pendaftaran::find($id);
         $data->isVerif = 1;
         $data->save();
+
+        $pendaftaranData = Pendaftaran::find($id);
+        Pemeriksaan::create([
+            'pendaftaran_id' => $pendaftaranData->id,
+            'bidan_id' => $pendaftaranData->bidan_id,
+            'pelayanan_id' => $pendaftaranData->pelayanan_id,
+            'ibu_id' => $pendaftaranData->ibu_id,
+            'tanggal_kunjungan' => $pendaftaranData->tanggal_pendaftaran,
+            'jam_kunjungan' => $pendaftaranData->jam_pendaftaran,
+            'harga' => $pendaftaranData->pelayanan->harga,
+            
+        ]);
+
+
         return redirect()->route('pendaftaran.index')->with('success', 'Data berhasil diubah');
     }
 }

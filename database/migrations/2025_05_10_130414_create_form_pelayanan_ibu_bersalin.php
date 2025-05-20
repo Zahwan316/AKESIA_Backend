@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_pelayanan_ibu_bersalin', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
+            $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
             $table->date('tanggal_persalinan');
             $table->time('jam_lahir');
             $table->string('umur_kehamilan');

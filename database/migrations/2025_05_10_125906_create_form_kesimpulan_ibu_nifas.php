@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_kesimpulan_ibu_nifas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
+            $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
             $table->enum('keadaan_ibu', ['Sehat', 'Sakit', 'Meninggal']);
             $table->enum('komplikasi_nifas', ['Pendarahan', 'Infeksi', 'Hipertensi', 'Lain-lain']);
             $table->enum('keadaan_bayi', ['Sehat', 'Sakit', 'Kelainan Bawaan', 'Meninggal']);

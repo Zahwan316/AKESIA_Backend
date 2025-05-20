@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_riwayat_kehamilan_sebelumnya', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
+            $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
             $table->integer('anak_ke');
             $table->string('apiah');
             $table->integer('umur_anak');

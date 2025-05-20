@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_pelayanan_ibu_nifas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
+            $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
             $table->string('klasifikasi_nifas_1')->nullable();
             $table->string('tindakan_nifas_1')->nullable();
             $table->date('tanggal_nifas_1')->nullable();

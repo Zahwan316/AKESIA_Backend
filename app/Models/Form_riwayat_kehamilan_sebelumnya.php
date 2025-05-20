@@ -9,7 +9,7 @@ class Form_riwayat_kehamilan_sebelumnya extends Model
     //
     protected $table = "form_riwayat_kehamilan_sebelumnya";
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'anak_ke',
         'apiah',
         'umur_anak',

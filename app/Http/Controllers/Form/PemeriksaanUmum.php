@@ -49,7 +49,7 @@ class PemeriksaanUmum extends Controller
             'genetalia' => 'required',
             'tinggi_badan' => 'required|integer',
             'berat_badan' => 'required|numeric',
-            'pendaftaran_id' => 'required',
+            'pemeriksaan_id' => 'required',
             'tanggal_kontrol_kembali' => 'nullable',
             'user_id' => 'required'
         ]);
@@ -74,7 +74,7 @@ class PemeriksaanUmum extends Controller
                 'genetalia',
                 'tinggi_badan',
                 'berat_badan',
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'tanggal_kontrol_kembali'
             ]));
 
@@ -122,7 +122,7 @@ class PemeriksaanUmum extends Controller
             'genetalia' => 'required',
             'tinggi_badan' => 'required|integer',
             'berat_badan' => 'required|numeric',
-            'pendaftaran_id' => 'required',
+            'pemeriksaan_id' => 'required',
             'tanggal_kontrol_kembali' => 'nullable'
         ]);
 
@@ -132,7 +132,7 @@ class PemeriksaanUmum extends Controller
                 'title' => 'Haloo mak',
                 'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
             ]);
-            
+
             $data = Form_pemeriksaan_umum::find($id);
             $data->update($request->only([
                 'bentuk_tubuh',
@@ -147,7 +147,7 @@ class PemeriksaanUmum extends Controller
                 'genetalia',
                 'tinggi_badan',
                 'berat_badan',
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'tanggal_kontrol_kembali'
             ]));
 
@@ -167,7 +167,7 @@ class PemeriksaanUmum extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_pemeriksaan_umum::where('pendaftaran_id', $id)->first();
+        $data = Form_pemeriksaan_umum::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

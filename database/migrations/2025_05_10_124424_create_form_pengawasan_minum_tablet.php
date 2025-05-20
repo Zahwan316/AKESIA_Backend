@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('form_pengawasan_minum_tablet', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pendaftaran_id')->constrained('pendaftarans')->cascadeOnDelete();
+            $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
             $table->integer('bulan_ke');
             $table->date('tanggal');
             $table->time('jam');

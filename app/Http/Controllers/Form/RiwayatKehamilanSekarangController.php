@@ -36,7 +36,7 @@ class RiwayatKehamilanSekarangController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'gravida' => 'required|integer',
             'partus' => 'required|integer',
             'rr_rt' => 'required|string|max:255',
@@ -90,7 +90,7 @@ class RiwayatKehamilanSekarangController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'gravida' => 'nullable|integer',
             'partus' => 'nullable|integer',
             'rr_rt' => 'nullable|string|max:255',
@@ -113,7 +113,7 @@ class RiwayatKehamilanSekarangController extends Controller
         try{
             $data = Form_riwayat_kehamilan_sekarang::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'gravida',
                 'partus',
                 'rr_rt',
@@ -147,7 +147,7 @@ class RiwayatKehamilanSekarangController extends Controller
         //
     }
     public function showFormByPendaftaran(string $id){
-        $data = Form_riwayat_kehamilan_sekarang::where('pendaftaran_id', $id)->first();
+        $data = Form_riwayat_kehamilan_sekarang::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

@@ -36,7 +36,7 @@ class KesimpulanIbuNifas extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'keadaan_ibu' => 'nullable|string|max:255',
             'komplikasi_nifas' => 'nullable|string|max:255',
             'keadaan_bayi' => 'nullable|string|max:255',
@@ -44,7 +44,7 @@ class KesimpulanIbuNifas extends Controller
 
         try{
             $data = Form_kesimpulan_ibu_nifas::create($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'keadaan_ibu',
                 'komplikasi_nifas',
                 'keadaan_bayi',
@@ -81,7 +81,7 @@ class KesimpulanIbuNifas extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'keadaan_ibu' => 'nullable|string|max:255',
             'komplikasi_nifas' => 'nullable|string|max:255',
             'keadaan_bayi' => 'nullable|string|max:255',
@@ -90,7 +90,7 @@ class KesimpulanIbuNifas extends Controller
         try{
             $data = Form_kesimpulan_ibu_nifas::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'keadaan_ibu',
                 'komplikasi_nifas',
                 'keadaan_bayi',
@@ -112,7 +112,7 @@ class KesimpulanIbuNifas extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_kesimpulan_ibu_nifas::where('pendaftaran_id', $id)->first();
+        $data = Form_kesimpulan_ibu_nifas::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

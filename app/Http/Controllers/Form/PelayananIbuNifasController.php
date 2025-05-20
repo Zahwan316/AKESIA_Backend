@@ -35,7 +35,7 @@ class PelayananIbuNifasController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'klasifikasi_nifas_1' => 'nullable|string|max:255',
             'tindakan_nifas_1' => 'nullable|string|max:255',
             'tanggal_nifas_1' => 'nullable|date',
@@ -52,7 +52,7 @@ class PelayananIbuNifasController extends Controller
 
         try{
             $data = Form_pelayanan_ibu_nifas::create($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'klasifikasi_nifas_1',
                 'tindakan_nifas_1',
                 'tanggal_nifas_1',
@@ -99,7 +99,7 @@ class PelayananIbuNifasController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|exists:pendaftarans,id',
             'klasifikasi_nifas_1' => 'nullable|string|max:255',
             'tindakan_nifas_1' => 'nullable|string|max:255',
             'tanggal_nifas_1' => 'nullable|date',
@@ -118,7 +118,7 @@ class PelayananIbuNifasController extends Controller
         try{
             $data = Form_pelayanan_ibu_nifas::find($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'klasifikasi_nifas_1',
                 'tindakan_nifas_1',
                 'tanggal_nifas_1',
@@ -148,7 +148,7 @@ class PelayananIbuNifasController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_pelayanan_ibu_nifas::where('pendaftaran_id', $id)->first();
+        $data = Form_pelayanan_ibu_nifas::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

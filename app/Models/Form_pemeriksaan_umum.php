@@ -11,7 +11,7 @@ class Form_pemeriksaan_umum extends Model
 
     protected $fillable = [
         'bentuk_tubuh',
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'kesadaran_id',
         'mata',
         'leher',

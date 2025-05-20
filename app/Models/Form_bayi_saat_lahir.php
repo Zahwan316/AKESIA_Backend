@@ -9,7 +9,7 @@ class Form_bayi_saat_lahir extends Model
     //
     protected $table = "form_bayi_saat_lahir";
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'anak_ke',
         'berat_lahir',
         'panjang_badan',

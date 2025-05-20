@@ -35,7 +35,7 @@ class PelayananIbuBersalinController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'tanggal_persalinan' => 'required|date',
             'jam_lahir' => 'required|date_format:H:i',
             'umur_kehamilan' => 'required|integer|between:1,42',
@@ -80,7 +80,7 @@ class PelayananIbuBersalinController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'tanggal_persalinan' => 'nullable|date',
             'jam_lahir' => 'nullable|date_format:H:i:s',
             'umur_kehamilan' => 'nullable|integer|between:1,42',
@@ -94,7 +94,7 @@ class PelayananIbuBersalinController extends Controller
         try{
             $data = Form_pelayanan_ibu_bersalin::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'tanggal_persalinan',
                 'jam_lahir',
                 'umur_kehamilan',
@@ -120,7 +120,7 @@ class PelayananIbuBersalinController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_pelayanan_ibu_bersalin::where('pendaftaran_id', $id)->first();
+        $data = Form_pelayanan_ibu_bersalin::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

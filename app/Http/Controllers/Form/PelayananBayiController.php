@@ -36,7 +36,7 @@ class PelayananBayiController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'nama_bayi' => 'required|string|max:255',
             'umur_bayi' => 'required|integer',
             'jenis_kelamin_bayi' => 'required|string',
@@ -47,7 +47,7 @@ class PelayananBayiController extends Controller
 
         try{
             $data = Form_Pelayanan_Bayi::create( $request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'nama_bayi',
                 'umur_bayi',
                 'jenis_kelamin_bayi',
@@ -87,7 +87,7 @@ class PelayananBayiController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|exists:pendaftarans,id',
             'nama_bayi' => 'nullable|string|max:255',
             'umur_bayi' => 'nullable|integer|min:0',
             'jenis_kelamin_bayi' => 'nullable|string',
@@ -99,7 +99,7 @@ class PelayananBayiController extends Controller
         try{
             $data = Form_Pelayanan_Bayi::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'nama_bayi',
                 'umur_bayi',
                 'jenis_kelamin_bayi',
@@ -123,7 +123,7 @@ class PelayananBayiController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_Pelayanan_Bayi::where('pendaftaran_id', $id)->first();
+        $data = Form_Pelayanan_Bayi::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

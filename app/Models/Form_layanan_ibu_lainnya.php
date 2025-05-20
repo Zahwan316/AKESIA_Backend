@@ -9,7 +9,7 @@ class Form_layanan_ibu_lainnya extends Model
     //
     protected $table = "form_layanan_ibu_lainnya";
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'nama_ibu',
         'umur_ibu',
         'booking_layanan',

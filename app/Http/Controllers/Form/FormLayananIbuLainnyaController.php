@@ -35,7 +35,7 @@ class FormLayananIbuLainnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'nama_ibu' => 'required|string|max:120',
             'umur_ibu' => 'required|integer|between:1,100',
             'booking_layanan' => 'required|string|max:255',
@@ -45,7 +45,7 @@ class FormLayananIbuLainnyaController extends Controller
 
         try{
             $data = Form_layanan_ibu_lainnya::create($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'nama_ibu',
                 'umur_ibu',
                 'booking_layanan',
@@ -84,7 +84,7 @@ class FormLayananIbuLainnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'nama_ibu' => 'nullable|string|max:120',
             'umur_ibu' => 'nullable|integer|between:1,100',
             'booking_layanan' => 'nullable|string|max:255',
@@ -95,7 +95,7 @@ class FormLayananIbuLainnyaController extends Controller
         try{
             $data = Form_layanan_ibu_lainnya::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'nama_ibu',
                 'umur_ibu',
                 'booking_layanan',
@@ -118,7 +118,7 @@ class FormLayananIbuLainnyaController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_layanan_ibu_lainnya::where('pendaftaran_id', $id)->first();
+        $data = Form_layanan_ibu_lainnya::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

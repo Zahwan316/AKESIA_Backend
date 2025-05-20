@@ -9,7 +9,7 @@ class Form_riwayat_kehamilan_sekarang extends Model
     //
     protected $table = "form_riwayat_kehamilan_sekarang";
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'gravida',
         'partus',
         'rr_rt',

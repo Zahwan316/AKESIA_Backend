@@ -10,7 +10,7 @@ class Form_pemeriksaan_lab extends Model
     protected $table = "form_pemeriksaan_lab";
 
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'tanggal_pemeriksaan',
         'jam_pemeriksaan',
         'nama',

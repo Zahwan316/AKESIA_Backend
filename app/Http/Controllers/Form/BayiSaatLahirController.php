@@ -35,7 +35,7 @@ class BayiSaatLahirController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'anak_ke' => 'required|integer',
             'berat_lahir' => 'required|numeric',
             'panjang_badan' => 'required|numeric',
@@ -79,7 +79,7 @@ class BayiSaatLahirController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'anak_ke' => 'nullable|integer',
             'berat_lahir' => 'nullable|numeric',
             'panjang_badan' => 'nullable|numeric',
@@ -92,7 +92,7 @@ class BayiSaatLahirController extends Controller
         try {
             $data = Form_bayi_saat_lahir::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'anak_ke',
                 'berat_lahir',
                 'panjang_badan',
@@ -116,7 +116,7 @@ class BayiSaatLahirController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_bayi_saat_lahir::where('pendaftaran_id', $id)->first();
+        $data = Form_bayi_saat_lahir::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

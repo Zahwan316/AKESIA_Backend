@@ -36,7 +36,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'anak_ke' => 'required|integer',
             'apiah' => 'required|string',
             'umur_anak' => 'required|integer',
@@ -82,7 +82,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'umur_anak' => 'nullable|integer',
             'apiah' => 'nullable|string',
             'p_l' => 'nullable|string',
@@ -96,7 +96,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
         try{
             $data = Form_riwayat_kehamilan_sebelumnya::findOrFail($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'umur_anak',
                 'apiah',
                 'p_l',
@@ -122,7 +122,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_riwayat_kehamilan_sebelumnya::where('pendaftaran_id', $id)->first();
+        $data = Form_riwayat_kehamilan_sebelumnya::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

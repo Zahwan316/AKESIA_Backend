@@ -35,7 +35,7 @@ class PemeriksaanLab extends Controller
     {
         //
         $validate = $request->validate([
-            'pendaftaran_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
             'tanggal_pemeriksaan' => 'required|date',
             'jam_pemeriksaan' => 'required|date_format:H:i',
             'nama' => 'required|string|max:255',
@@ -48,7 +48,7 @@ class PemeriksaanLab extends Controller
 
         try{
             $data = Form_pemeriksaan_lab::create($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'tanggal_pemeriksaan',
                 'jam_pemeriksaan',
                 'nama',
@@ -90,7 +90,7 @@ class PemeriksaanLab extends Controller
     {
         //
         $validate = $request->validate([
-            //'pendaftaran_id' => 'nullable|integer|exists:pendaftarans,id',
+            //'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
             'tanggal_pemeriksaan' => 'nullable|date',
             'jam_pemeriksaan' => 'nullable',
             'nama' => 'nullable|string|max:255',
@@ -104,7 +104,7 @@ class PemeriksaanLab extends Controller
         try{
             $data = Form_pemeriksaan_lab::find($id);
             $data->update($request->only([
-                'pendaftaran_id',
+                'pemeriksaan_id',
                 'tanggal_pemeriksaan',
                 'jam_pemeriksaan',
                 'nama',
@@ -130,7 +130,7 @@ class PemeriksaanLab extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_pemeriksaan_lab::where('pendaftaran_id', $id)->first();
+        $data = Form_pemeriksaan_lab::where('pemeriksaan_id', $id)->first();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

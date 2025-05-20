@@ -9,7 +9,7 @@ class Form_pengawasan_minum_tablet extends Model
     //
     protected $table = "form_pengawasan_minum_tablet";
     protected $fillable = [
-        'pendaftaran_id',
+        'pemeriksaan_id',
         'bulan_ke',
         'tanggal',
         'jam'
