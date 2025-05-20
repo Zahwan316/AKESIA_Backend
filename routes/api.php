@@ -6,6 +6,8 @@ use App\Http\Controllers\Form\PelayananIbuNifasController;
 use App\Http\Controllers\Form\PemeriksaanUmum;
 use App\Http\Controllers\Form\RiwayatKehamilanSekarangController;
 use App\Http\Controllers\Notification\NotificationController;
+use App\Http\Controllers\Pemeriksaan\PemeriksaanController;
+use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
@@ -52,6 +54,9 @@ Route::middleware('auth:api')->resource('bayi', BayiController::class);
 
 //bayi
 Route::middleware('auth:api')->get('/getUserAnak', [BayiController::class,'getAnak']);
+
+//pemeriksaan
+Route::middleware('auth:api')->resource('pemeriksaan', PemeriksaanController::class);
 
 //Layanan
 route::prefix('layanan')->middleware('auth:api')->group( function () {

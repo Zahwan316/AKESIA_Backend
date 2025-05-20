@@ -35,7 +35,7 @@ class PemeriksaanLab extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'tanggal_pemeriksaan' => 'required|date',
             'jam_pemeriksaan' => 'required|date_format:H:i',
             'nama' => 'required|string|max:255',
@@ -90,7 +90,7 @@ class PemeriksaanLab extends Controller
     {
         //
         $validate = $request->validate([
-            //'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
+            //'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'tanggal_pemeriksaan' => 'nullable|date',
             'jam_pemeriksaan' => 'nullable',
             'nama' => 'nullable|string|max:255',

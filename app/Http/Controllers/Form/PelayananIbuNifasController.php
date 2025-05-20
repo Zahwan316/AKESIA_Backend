@@ -35,7 +35,7 @@ class PelayananIbuNifasController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'klasifikasi_nifas_1' => 'nullable|string|max:255',
             'tindakan_nifas_1' => 'nullable|string|max:255',
             'tanggal_nifas_1' => 'nullable|date',
@@ -99,7 +99,7 @@ class PelayananIbuNifasController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|exists:pemeriksaans,id',
             'klasifikasi_nifas_1' => 'nullable|string|max:255',
             'tindakan_nifas_1' => 'nullable|string|max:255',
             'tanggal_nifas_1' => 'nullable|date',

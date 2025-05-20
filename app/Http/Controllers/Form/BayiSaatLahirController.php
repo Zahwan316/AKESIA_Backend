@@ -35,7 +35,7 @@ class BayiSaatLahirController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'anak_ke' => 'required|integer',
             'berat_lahir' => 'required|numeric',
             'panjang_badan' => 'required|numeric',
@@ -79,7 +79,7 @@ class BayiSaatLahirController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'anak_ke' => 'nullable|integer',
             'berat_lahir' => 'nullable|numeric',
             'panjang_badan' => 'nullable|numeric',

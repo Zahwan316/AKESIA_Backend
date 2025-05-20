@@ -36,7 +36,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'anak_ke' => 'required|integer',
             'apiah' => 'required|string',
             'umur_anak' => 'required|integer',
@@ -82,7 +82,7 @@ class RiwayatKehamilanSebelumnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'umur_anak' => 'nullable|integer',
             'apiah' => 'nullable|string',
             'p_l' => 'nullable|string',

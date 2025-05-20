@@ -17,4 +17,17 @@ class Pemeriksaan extends Model
         'tanggal_kunjungan',
         'jam_kunjungan'
     ];
+
+    public function pelayanan(){
+        return $this->belongsTo(Pelayanan::class);
+    }
+    public function ibu(){
+        return $this->belongsTo(Ibu::class);
+    }
+    public function bayi(){
+        return $this->belongsTo(Bayi::class);
+    }
+    public function pendaftaran(){
+        return $this->belongsTo(Pendaftaran::class);
+    }
 }

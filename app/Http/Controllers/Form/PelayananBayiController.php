@@ -36,7 +36,7 @@ class PelayananBayiController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'nama_bayi' => 'required|string|max:255',
             'umur_bayi' => 'required|integer',
             'jenis_kelamin_bayi' => 'required|string',
@@ -87,7 +87,7 @@ class PelayananBayiController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|exists:pemeriksaans,id',
             'nama_bayi' => 'nullable|string|max:255',
             'umur_bayi' => 'nullable|integer|min:0',
             'jenis_kelamin_bayi' => 'nullable|string',

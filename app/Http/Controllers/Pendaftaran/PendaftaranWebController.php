@@ -101,16 +101,15 @@ class PendaftaranWebController extends Controller
         $data->isVerif = 1;
         $data->save();
 
-        $pendaftaranData = Pendaftaran::find($id);
         Pemeriksaan::create([
-            'pendaftaran_id' => $pendaftaranData->id,
-            'bidan_id' => $pendaftaranData->bidan_id,
-            'pelayanan_id' => $pendaftaranData->pelayanan_id,
-            'ibu_id' => $pendaftaranData->ibu_id,
-            'tanggal_kunjungan' => $pendaftaranData->tanggal_pendaftaran,
-            'jam_kunjungan' => $pendaftaranData->jam_pendaftaran,
-            'harga' => $pendaftaranData->pelayanan->harga,
-            
+            'pendaftaran_id' => $data->id,
+            'bidan_id' => $data->bidan_id,
+            'pelayanan_id' => $data->pelayanan_id,
+            'ibu_id' => $data->ibu_id,
+            'tanggal_kunjungan' => now(),
+            'jam_kunjungan' => $data->jam_ditentukan,
+            'harga' => $data->pelayanan->harga,
+
         ]);
 
 

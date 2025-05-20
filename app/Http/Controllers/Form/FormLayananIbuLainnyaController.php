@@ -35,7 +35,7 @@ class FormLayananIbuLainnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'nama_ibu' => 'required|string|max:120',
             'umur_ibu' => 'required|integer|between:1,100',
             'booking_layanan' => 'required|string|max:255',
@@ -84,7 +84,7 @@ class FormLayananIbuLainnyaController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'nama_ibu' => 'nullable|string|max:120',
             'umur_ibu' => 'nullable|integer|between:1,100',
             'booking_layanan' => 'nullable|string|max:255',

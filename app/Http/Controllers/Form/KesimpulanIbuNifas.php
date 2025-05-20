@@ -36,7 +36,7 @@ class KesimpulanIbuNifas extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'keadaan_ibu' => 'nullable|string|max:255',
             'komplikasi_nifas' => 'nullable|string|max:255',
             'keadaan_bayi' => 'nullable|string|max:255',
@@ -81,7 +81,7 @@ class KesimpulanIbuNifas extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'keadaan_ibu' => 'nullable|string|max:255',
             'komplikasi_nifas' => 'nullable|string|max:255',
             'keadaan_bayi' => 'nullable|string|max:255',

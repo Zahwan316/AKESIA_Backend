@@ -36,7 +36,7 @@ class PengawasanMinumTabletController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'required|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'bulan_ke' => 'required|integer|between:1,12',
             'tanggal' => 'required|date',
             'jam' => 'required',
@@ -81,7 +81,7 @@ class PengawasanMinumTabletController extends Controller
     {
         //
         $validate = $request->validate([
-            'pemeriksaan_id' => 'nullable|integer|exists:pendaftarans,id',
+            'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'bulan_ke' => 'nullable|integer|between:1,12',
             'tanggal' => 'nullable|date',
             'jam' => 'nullable',
