@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    <link rel="icon" href="src='{{asset('img/LogoBidanBunda.png')}}'" type="image/x-icon">
 
 
 
@@ -55,6 +56,19 @@
                 <a class="nav-link" href="{{route('pendaftaran.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Pendaftaran</span></a>
+            </li>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('laporan.index')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Laporan</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{{route('pendaftaran.index')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Bidan</span></a>
             </li>
 
 

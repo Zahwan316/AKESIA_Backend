@@ -23,4 +23,8 @@ class Pelayanan extends Model
     public function upload(){
         return $this->hasOne(Upload::class);
     }
+
+    public function jenis_layanan(){
+        return $this->belongsTo(Jenis_layanan::class);
+    }
 }

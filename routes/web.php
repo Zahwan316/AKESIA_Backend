@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthWebController;
+use App\Http\Controllers\Laporan\LaporanWebController;
 use App\Http\Controllers\Pendaftaran\PendaftaranWebController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,8 @@ Route::middleware(['web', 'auth:web'])->prefix("admin")->group(function () {
 
     Route::resource('pendaftaran', PendaftaranWebController::class);
     Route::put('verifikasi/pendaftaran/{id}', [PendaftaranWebController::class, 'verifikasi'])->name('pendaftaran.verifikasi');
+
+    Route::resource('laporan', LaporanWebController::class);
 });
+
+

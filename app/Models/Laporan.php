@@ -15,4 +15,16 @@ class Laporan extends Model
         'jenis_pasien',
         'total_kunjungan'
     ];
+
+    public function pemeriksaan() {
+        return $this->belongsTo(Pemeriksaan::class);
+    }
+
+    public function ibu(){
+        return $this->belongsTo(Ibu::class);
+    }
+
+    public function bayi(){
+        return $this->belongsTo(Bayi::class);
+    }
 }
