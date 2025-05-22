@@ -197,6 +197,28 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops!',
+                text: '{{ session('error') }}'
+            });
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        </script>
+    @endif
+
     {{-- <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 

@@ -25,7 +25,7 @@ class PemeriksaanController extends Controller
         if($query){
             //$tanggal = Carbon::createFromFormat('d/m/Y', $query)->format('Y-m-d');
             $data = Pemeriksaan::with('pelayanan', 'bayi', 'ibu.user', 'pendaftaran.bayi')
-            ->whereDate('created_at', $query)
+            ->whereDate('tanggal_kunjungan', $query)
             ->orderBy('created_at', 'desc')
             ->get();
         }
@@ -129,11 +129,18 @@ class PemeriksaanController extends Controller
                 'jam_kunjungan',
             ]));
 
+            //set harga dengan data baru
+            $data->load('pelayanan');
+            $data->harga = $data->pelayanan->harga;
+
+
+            //cek umur
             function hitungUmur($tanggalLahir)
             {
                 return Carbon::parse($tanggalLahir)->age;
             }
 
+            //fungsi untuk menentukan harga tambahan
             if($request->pelayanan != null && $request->tanggal_lahir_bayi_pemeriksaan != null){
                 $pelayanan = Pelayanan::where('nama', 'LIKE' , '%' . $request->pelayanan['nama'] . '%')->first();
                 $umur = hitungUmur($request->tanggal_lahir_bayi_pemeriksaan);
@@ -160,6 +167,7 @@ class PemeriksaanController extends Controller
                 }
                 //dd($pelayanan);
             }
+            $data->save();
 
             $totalKunjungan = Pemeriksaan::where('ibu_id', $data->ibu_id)->count();
 
@@ -172,15 +180,18 @@ class PemeriksaanController extends Controller
                 $jenisPasien = 'Baru';
             }
 
-            $laporan = Laporan::create(
-                [
+
+            $laporan = Laporan::where('pemeriksaan_id', $id)->first();
+
+            if (!$laporan) {
+                $laporan = Laporan::create([
                     'pemeriksaan_id' => $id,
                     'ibu_id' => $data->ibu_id,
                     'bayi_id' => $data->pendaftaran->bayi_id,
                     'jenis_pasien' => $jenisPasien,
                     'total_kunjungan' => $totalKunjungan
-                ]
-            );
+                ]);
+            }
 
             return $this->apiResponse('Data berhasil diubah', $data);
 
@@ -196,5 +207,15 @@ class PemeriksaanController extends Controller
     public function destroy(string $id)
     {
         //
+        try{
+            $data = Pemeriksaan::find($id);
+
+            $data->delete();
+            return $this->apiResponse('Data berhasil dihapus');
+        }
+        catch(\Exception $e){
+            return $this->apiResponse($e->getMessage(), '',500,);
+        }
+
     }
 }

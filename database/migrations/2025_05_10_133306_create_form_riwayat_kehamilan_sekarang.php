@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('hpht');
             $table->enum('muntah', ['Biasa', 'Terus Menerus']);
             $table->enum('pusing', ['Biasa', 'Terus Menerus']);
-            $table->enum('nyeri_perut', ['Ada', 'Tidak']);
+            $table->enum('nyeri_perut', ['Ada', 'Tidak Ada']);
             $table->enum('nafsu_makan', ['Baik', 'Menurun']);
-            $table->enum('pendarahan', ['Ada', 'Tidak']);
+            $table->enum('pendarahan', ['Ada', 'Tidak Ada']);
             $table->enum('riwayat_penyakit', [
                 'Paru',
                 'DM',

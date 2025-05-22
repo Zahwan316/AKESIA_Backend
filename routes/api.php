@@ -11,6 +11,7 @@ use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Bayi\BayiController;
 use App\Http\Controllers\Bidan\BidanController;
 use App\Http\Controllers\Form\BayiSaatLahirController;
@@ -57,6 +58,9 @@ Route::middleware('auth:api')->get('/getUserAnak', [BayiController::class,'getAn
 
 //pemeriksaan
 Route::middleware('auth:api')->resource('pemeriksaan', PemeriksaanController::class);
+
+//banner
+Route::middleware('auth:api')->resource('banner', BannerController::class);
 
 //Layanan
 route::prefix('layanan')->middleware('auth:api')->group( function () {

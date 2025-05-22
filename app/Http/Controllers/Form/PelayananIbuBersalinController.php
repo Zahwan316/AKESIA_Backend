@@ -82,7 +82,7 @@ class PelayananIbuBersalinController extends Controller
         $validate = $request->validate([
             'pemeriksaan_id' => 'nullable|integer|exists:pemeriksaans,id',
             'tanggal_persalinan' => 'nullable|date',
-            'jam_lahir' => 'nullable|date_format:H:i:s',
+            'jam_lahir' => 'nullable|date_format:H:i',
             'umur_kehamilan' => 'nullable|integer|between:1,42',
             'penolong_persalinan' => 'nullable|string',
             'cara_persalinan' => 'nullable|string',

@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body">
                         <p><span style='font-weight: bold;'>Nama Pendaftar : </span>{{$data->ibu->user->nama_lengkap}}</p>
-                        <p><span style='font-weight: bold;'>Nama Anak : </span>{{$data->bayi->nama_lengkap != null ? $data->bayi->nama_lengkap : 'Pemeriksaanidak dengan anak'}}</p>
+                        <p><span style='font-weight: bold;'>Nama Anak : </span> {{ $data->bayi?->nama_lengkap ?? 'Pemeriksaan tidak dengan anak' }}</p>
                         <p><span style='font-weight: bold;'>Jenis Pasien : </span>{{$data->jenis_pasien}}</p>
                         <p><span style='font-weight: bold;'>Tanggal Kunjungan </span>{{$data->pemeriksaan->tanggal_kunjungan}}</p>
                         <p><span style='font-weight: bold;'>Jam Kunjungan </span>{{$data->pemeriksaan->jam_kunjungan}}</p>
@@ -40,7 +40,7 @@
                         <p><span style='font-weight: bold;'>Layanan yang dipilih : </span>{{$data->pemeriksaan->pelayanan->nama}}</p>
                         <p><span style='font-weight: bold;'>Jenis Layanan : </span>{{$data->pemeriksaan->pelayanan->jenis_layanan->nama}}</p>
                         <p><span style='font-weight: bold;'>Bidan yang melayani : </span>{{$data->pemeriksaan->bidan->user->nama_lengkap}}</p>
-                        <p><span style='font-weight: bold;'>Harga Layanan : </span>Rp{{$data->pemeriksaan->harga}}</p>
+                        <p><span style='font-weight: bold;'>Harga Layanan : </span>Rp{{number_format($data->pemeriksaan->harga, 0, ',', '.')}}</p>
                         <p><span style='font-weight: bold;'>Keluhan : </span>{{$data->pemeriksaan->pendaftaran->keluhan}}</p>
                     </div>
                 </div>
@@ -127,6 +127,16 @@
             text: '{{ session('success') }}',
             timer: 2000,
             showConfirmButton: false
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: '{{ session('error') }}'
         });
     </script>
 @endif

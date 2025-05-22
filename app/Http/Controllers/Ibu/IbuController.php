@@ -10,7 +10,7 @@ use App\Models\User;
 class IbuController extends Controller
 {
     public function GetDataIbu(string $user_id){
-        $data = Ibu::where("user_id",$user_id)->get();
+        $data = Ibu::with('User')->where("user_id",$user_id)->get();
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 
@@ -20,7 +20,7 @@ class IbuController extends Controller
     }
 
     public function GetCurrIbu(){
-        $data = Ibu::where("user_id",auth()->guard()->user()->id)->first();
+        $data = Ibu::with('User')->where("user_id",auth()->guard()->user()->id)->first();
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 
@@ -87,7 +87,7 @@ class IbuController extends Controller
             'pendidikan' => 'nullable',
             'pekerjaan' => 'nullable',
             'alamat_domisili' => 'nullable',
-            'telepon' => 'nullable|unique:ibus',
+            'telepon' => 'nullable',
             'nama_lengkap' => 'nullable',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
@@ -95,6 +95,9 @@ class IbuController extends Controller
         ]);
 
         try{
+            $user = User::findOrFail(auth()->guard()->user()->id);
+            $user->nama_lengkap = $request->nama_lengkap;
+            $user->save();
             $data = Ibu::findOrFail($id);
             $data->update($request->only([
                 'nik', 'golongan_darah', 'tempat_lahir', 'tanggal_lahir',

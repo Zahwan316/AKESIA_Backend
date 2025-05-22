@@ -11,10 +11,16 @@ class LaporanWebController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = Laporan::with('pemeriksaan','ibu')->get();
+        $query = $request->query('tanggal');
+        if($query){
+            $data = Laporan::with('pemeriksaan', 'ibu')->whereDate('created_at', $query)->get();
+        }
+        else{
+            $data = Laporan::with('pemeriksaan','ibu')->orderBy('created_at','desc')->get();
+        }
 
         return view('admin.laporan.index', compact('data'));
     }

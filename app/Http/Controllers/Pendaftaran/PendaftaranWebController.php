@@ -98,6 +98,9 @@ class PendaftaranWebController extends Controller
 
     public function verifikasi(string $id){
         $data = Pendaftaran::find($id);
+        if($data->bidan_id === null){
+            return redirect()->route('pendaftaran.index')->with('error', 'Tentukan terlebih dahulu untuk bidan dan jam pemeriksaan!!');
+        }
         $data->isVerif = 1;
         $data->save();
 
@@ -106,13 +109,13 @@ class PendaftaranWebController extends Controller
             'bidan_id' => $data->bidan_id,
             'pelayanan_id' => $data->pelayanan_id,
             'ibu_id' => $data->ibu_id,
-            'tanggal_kunjungan' => now(),
+            'tanggal_kunjungan' => $data->tanggal_pendaftaran,
             'jam_kunjungan' => $data->jam_ditentukan,
             'harga' => $data->pelayanan->harga,
 
         ]);
 
 
-        return redirect()->route('pendaftaran.index')->with('success', 'Data berhasil diubah');
+        return redirect()->route('pendaftaran.index')->with('success', 'Berhasil Diverifikasi');
     }
 }
