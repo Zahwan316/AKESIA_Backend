@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlbumFoto\AlbumFotoController;
+use App\Http\Controllers\AlbumFoto\AlbumFotoJaninController;
+use App\Http\Controllers\AlbumFoto\AlbumFotoUsgController;
 use App\Http\Controllers\Form\KesimpulanIbuNifas;
 use App\Http\Controllers\Form\PelayananIbuBersalinController;
 use App\Http\Controllers\Form\PelayananIbuNifasController;
@@ -61,6 +64,14 @@ Route::middleware('auth:api')->resource('pemeriksaan', PemeriksaanController::cl
 
 //banner
 Route::middleware('auth:api')->resource('banner', BannerController::class);
+
+//album foto
+Route::middleware('auth:api')->resource('album_foto_janin', AlbumFotoJaninController::class);
+Route::middleware('auth:api')->get('album_foto_janins/getByUserId/', [AlbumFotoJaninController::class, 'getItemByUserId']);
+Route::middleware('auth:api')->resource('album_foto', AlbumFotoController::class);
+Route::middleware('auth:api')->get('album_foto/getByUsgId/{id}', [AlbumFotoController::class, 'getItemByUsgId']);
+Route::middleware('auth:api')->resource('album_foto_usg', AlbumFotoUsgController::class);
+Route::middleware('auth:api')->get('album_foto_usg/getByJaninId/{id}', [AlbumFotoUsgController::class, 'getItemByJaninId']);
 
 //Layanan
 route::prefix('layanan')->middleware('auth:api')->group( function () {
