@@ -10,6 +10,7 @@ use App\Http\Controllers\Form\PemeriksaanUmum;
 use App\Http\Controllers\Form\RiwayatKehamilanSekarangController;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\Pemeriksaan\PemeriksaanController;
+use App\Http\Controllers\RiwayatKehamilan\RiwayatKehamilanFotoController;
 use App\Models\Pemeriksaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Layanan\PelayananFormItemController;
 use App\Http\Controllers\Layanan\TambahanLayananController;
 use App\Http\Controllers\Pendaftaran\PendaftaranController;
 use App\Http\Controllers\Ref\ReferensiController;
+use App\Http\Controllers\RiwayatKehamilan\RiwayatKehamilanGroupController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -72,6 +74,13 @@ Route::middleware('auth:api')->resource('album_foto', AlbumFotoController::class
 Route::middleware('auth:api')->get('album_foto/getByUsgId/{id}', [AlbumFotoController::class, 'getItemByUsgId']);
 Route::middleware('auth:api')->resource('album_foto_usg', AlbumFotoUsgController::class);
 Route::middleware('auth:api')->get('album_foto_usg/getByJaninId/{id}', [AlbumFotoUsgController::class, 'getItemByJaninId']);
+
+//riwayat kehamilan foto
+Route::middleware('auth:api')->resource('riwayat_kehamilan_foto', RiwayatKehamilanFotoController::class);
+Route::middleware('auth:api')->get('riwayat_kehamilan_foto/getByGroupId/{id}', [RiwayatKehamilanFotoController::class, 'getByGroupId']);
+Route::middleware('auth:api')->resource('riwayat_kehamilan_group', RiwayatKehamilanGroupController::class);
+Route::middleware('auth:api')->get('riwayat_kehamilan_groups/getByUserId', [RiwayatKehamilanGroupController::class, 'getByUserId']);
+
 
 //Layanan
 route::prefix('layanan')->middleware('auth:api')->group( function () {

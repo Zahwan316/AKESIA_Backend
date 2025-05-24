@@ -92,7 +92,7 @@ class PendaftaranController extends Controller
     public function show(string $id)
     {
         //
-        $pendaftaran = Pendaftaran::with(['pelayanan', 'ibu.user'])->find($id);
+        $pendaftaran = Pendaftaran::with(['pelayanan', 'ibu.user', 'bayi'])->find($id);
         return $this->apiResponse('Data berhasil diambil', $pendaftaran);
     }
 
