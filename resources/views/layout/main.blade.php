@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ASKESIA - @yield('title')</title>
+    <title>AKESIA - @yield('title')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -19,7 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-    <link rel="icon" href="src='{{asset('img/LogoBidanBunda.png')}}'" type="image/x-icon">
+    <link rel="icon" href="{{asset('img/LogoBidanBunda.png')}}" type="image/x-icon">
 
 
 
@@ -35,10 +35,14 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="w-25">
+                    <img
+                        src='{{asset("img/LogoBidanBunda.png")}}'
+                        width="100%"
+                        height="100%"
+                    />
                 </div>
-                <div class="sidebar-brand-text mx-3">ASKESIA</div>
+                <div class="sidebar-brand-text mx-3">AKESIA</div>
             </a>
 
             <!-- Divider -->

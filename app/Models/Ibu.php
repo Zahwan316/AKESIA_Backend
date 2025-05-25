@@ -25,6 +25,7 @@ class Ibu extends Model
         'tinggi_badan',
         'usia_kehamilan',
         'user_id',
+        'hpht',
     ];
 
     public function User(): BelongsTo

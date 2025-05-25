@@ -42,10 +42,11 @@ class BayiController extends Controller
             'golongan_darah' => 'nullable|string|max:4',
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
-            'no_akta_kelahiran' => 'nullable|string|unique:bayis,no_akta_kelahiran',
-            'no_registrasi_kohort_bayi' => 'nullable|string|unique:bayis,no_registrasi_kohort_bayi',
-            'no_registrasi_kohort_balita' => 'nullable|string|unique:bayis,no_registrasi_kohort_balita',
-            'no_catatan_medik_rs' => 'nullable|string|unique:bayis,no_catatan_medik_rs',
+            'no_akta_kelahiran' => 'nullable|unique:bayis,no_akta_kelahiran',
+            'no_registrasi_kohort_bayi' => 'nullable|unique:bayis,no_registrasi_kohort_bayi',
+            'no_registrasi_kohort_balita' => 'nullable|unique:bayis,no_registrasi_kohort_balita',
+            'no_registrasi_kohort_ibu' => 'nullable|unique:bayis,no_registrasi_kohort_ibu',
+            'no_catatan_medik_rs' => 'nullable|unique:bayis,no_catatan_medik_rs',
             'anak_ke' => 'required|integer|min:1',
         ]);
 
@@ -63,6 +64,7 @@ class BayiController extends Controller
                 'no_akta_kelahiran' => $request->no_akta_kelahiran,
                 'no_registrasi_kohort_bayi' => $request->no_registrasi_kohort_bayi,
                 'no_registrasi_kohort_balita' => $request->no_registrasi_kohort_balita,
+                'no_registrasi_kohort_ibu' => $request->no_registrasi_kohort_ibu,
                 'no_catatan_medik_rs' => $request->no_catatan_medik_rs,
                 'anak_ke' => $request->anak_ke,
             ]);
@@ -107,9 +109,10 @@ class BayiController extends Controller
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',
             'no_akta_kelahiran' => 'nullable|string',
-            'no_registrasi_kohort_bayi' => 'nullable|string|unique:bayis,no_registrasi_kohort_bayi',
-            'no_registrasi_kohort_balita' => 'nullable|string|unique:bayis,no_registrasi_kohort_balita',
-            'no_catatan_medik_rs' => 'nullable|string|unique:bayis,no_catatan_medik_rs',
+            'no_registrasi_kohort_bayi' => 'nullable',
+            'no_registrasi_kohort_balita' => 'nullable',
+            'no_registrasi_kohort_ibu' => 'nullable',
+            'no_catatan_medik_rs' => 'nullable',
             'anak_ke' => 'nullable|integer|min:1',
         ]);
 
@@ -127,6 +130,7 @@ class BayiController extends Controller
                 'no_akta_kelahiran',
                 'no_registrasi_kohort_bayi',
                 'no_registrasi_kohort_balita',
+                'no_registrasi_kohort_ibu',
                 'no_catatan_medik_rs',
                 'anak_ke',
             ]));

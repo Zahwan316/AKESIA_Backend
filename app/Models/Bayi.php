@@ -18,6 +18,7 @@ class Bayi extends Model
         'no_akta_kelahiran',
         'no_registrasi_kohort_bayi',
         'no_registrasi_kohort_balita',
+        'no_registrasi_kohort_ibu',
         'no_catatan_medik_rs',
         'anak_ke',
     ];

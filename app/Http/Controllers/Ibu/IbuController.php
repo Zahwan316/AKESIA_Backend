@@ -38,7 +38,8 @@ class IbuController extends Controller
             'nama_lengkap' => 'required',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
-            'usia_kehamilan' => 'nullable'
+            'usia_kehamilan' => 'nullable',
+            'hpht' => 'nullable'
         ]);
 
     try{
@@ -63,7 +64,8 @@ class IbuController extends Controller
             'user_id' => auth()->guard()->user()->id,
             'berat_badan' => $request->berat_badan,
             'tinggi_badan' => $request->tinggi_badan,
-            'usia_kehamilan' => $request->usia_kehamilan
+            'usia_kehamilan' => $request->usia_kehamilan,
+            'hpht' => $request->hpht,
 
         ]);
         return response()->json(['message' => 'Data berhasil disimpan', 'status_code' => 201], 201);
@@ -74,13 +76,12 @@ class IbuController extends Controller
             'message' => $e->getMessage(),
             'status_code' => 500
         ], 500);
-    }
-
+        }
     }
 
     public function UpdateData(Request $request, string $id){
         $validate = $request->validate([
-            'nik' => 'nullable|string|unique:ibus|size:16',
+            'nik' => 'nullable|size:16',
             'golongan_darah' => 'nullable',
             'tempat_lahir' => 'nullable',
             'tanggal_lahir' => 'nullable',
@@ -91,7 +92,8 @@ class IbuController extends Controller
             'nama_lengkap' => 'nullable',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
-            'usia_kehamilan' => 'nullable'
+            'usia_kehamilan' => 'nullable',
+            'hpht' => 'nullable'
         ]);
 
         try{
@@ -102,7 +104,7 @@ class IbuController extends Controller
             $data->update($request->only([
                 'nik', 'golongan_darah', 'tempat_lahir', 'tanggal_lahir',
                 'pendidikan', 'pekerjaan', 'alamat_domisili', 'telepon', 'user_id',
-                'berat_badan', 'tinggi_badan', 'usia_kehamilan'
+                'berat_badan', 'tinggi_badan', 'usia_kehamilan', 'hpht'
             ]));
             return response()->json(['message' => 'Data berhasil disimpan', 'status_code' => 201], 201);
         }

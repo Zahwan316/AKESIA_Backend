@@ -20,10 +20,11 @@ return new class extends Migration
             $table->char('golongan_darah', 4)->nullable();
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->char('no_akta_kelahiran')->unique()->nullable();
-            $table->char('no_registrasi_kohort_bayi')->unique()->nullable();
-            $table->char('no_registrasi_kohort_balita')->unique()->nullable();
-            $table->char('no_catatan_medik_rs')->unique()->nullable();
+            $table->varchar('no_akta_kelahiran')->unique()->nullable();
+            $table->varchar('no_registrasi_kohort_bayi')->unique()->nullable();
+            $table->varchar('no_registrasi_kohort_balita')->unique()->nullable();
+            $table->varchar('no_registrasi_kohort_ibu')->unique()->nullable();
+            $table->varchar('no_catatan_medik_rs')->unique()->nullable();
             $table->integer('anak_ke')->unsigned();
 
             $table->timestamps();

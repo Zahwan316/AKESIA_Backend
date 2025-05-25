@@ -27,6 +27,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('berat_badan', )->nullable();
             $table->unsignedSmallInteger('tinggi_badan', )->nullable();
             $table->unsignedSmallInteger('usia_kehamilan', )->nullable();
+            $table->date('hpht', )->nullable();
             $table->timestamps();
         });
     }
