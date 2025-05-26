@@ -5,8 +5,14 @@ namespace App\Http\Controllers\Form;
 use App\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Form_pemeriksaan_umum;
-use App\Models\Notification;
+use App\Models\Notifications;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
+use Carbon\Carbon;
+
 
 class PemeriksaanUmum extends Controller
 {
@@ -51,15 +57,35 @@ class PemeriksaanUmum extends Controller
             'berat_badan' => 'required|numeric',
             'pemeriksaan_id' => 'required',
             'tanggal_kontrol_kembali' => 'nullable',
-            'user_id' => 'required'
+            'user_id' => 'required',
+            'soap' => 'nullable'
         ]);
 
         try{
-            $notif = Notification::create([
+            $notif = Notifications::create([
                 'user_id' => $request->user_id,
                 'title' => 'Haloo mak',
                 'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
             ]);
+            Carbon::setLocale('id');
+            $tanggal = Carbon::parse($request->tanggal_kontrol_kembali)->translatedFormat('l, d F Y');
+
+
+
+            $user = User::findOrFail(auth()->guard()->user()->id);
+            if ($user->fcm_token) {
+                $messaging = (new Factory)
+                    ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
+                    ->createMessaging();
+
+                $message = CloudMessage::withTarget('token', $user->fcm_token)
+                    ->withNotification(Notification::create(
+                        'Kontrol Kembali yuk!',
+                        'Ibu, mohon kontrol kembali pada tanggal '.$tanggal
+                    ));
+
+                $messaging->send($message);
+            }
 
             $data = Form_pemeriksaan_umum::create($request->only([
                 'bentuk_tubuh',
@@ -123,15 +149,33 @@ class PemeriksaanUmum extends Controller
             'tinggi_badan' => 'required|integer',
             'berat_badan' => 'required|numeric',
             'pemeriksaan_id' => 'required',
-            'tanggal_kontrol_kembali' => 'nullable'
+            'tanggal_kontrol_kembali' => 'nullable',
+            'soap' => 'nullable'
         ]);
 
         try{
-            $notif = Notification::create([
+            $notif = Notifications::create([
                 'user_id' => $request->user_id,
                 'title' => 'Haloo mak',
                 'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
             ]);
+            Carbon::setLocale('id');
+            $tanggal = Carbon::parse($request->tanggal_kontrol_kembali)->translatedFormat('l, d F Y');
+
+            $user = User::findOrFail(auth()->guard()->user()->id);
+            if ($user->fcm_token) {
+                $messaging = (new Factory)
+                    ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
+                    ->createMessaging();
+
+                $message = CloudMessage::withTarget('token', $user->fcm_token)
+                    ->withNotification(Notification::create(
+                        'Kontrol Kembali yuk!',
+                        'Ibu, mohon kontrol kembali pada tanggal '.$tanggal
+                    ));
+
+                $messaging->send($message);
+            }
 
             $data = Form_pemeriksaan_umum::find($id);
             $data->update($request->only([

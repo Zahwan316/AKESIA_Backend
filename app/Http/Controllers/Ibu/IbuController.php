@@ -98,8 +98,10 @@ class IbuController extends Controller
 
         try{
             $user = User::findOrFail(auth()->guard()->user()->id);
-            $user->nama_lengkap = $request->nama_lengkap;
-            $user->save();
+            if($request->nama_lengkap){
+                $user->nama_lengkap = $request->nama_lengkap;
+                $user->save();
+            }
             $data = Ibu::findOrFail($id);
             $data->update($request->only([
                 'nik', 'golongan_darah', 'tempat_lahir', 'tanggal_lahir',

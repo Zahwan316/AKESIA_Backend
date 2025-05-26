@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Bayi\BayiController;
 use App\Http\Controllers\Bidan\BidanController;
+use App\Http\Controllers\Fcm\FcmNotificationController;
 use App\Http\Controllers\Form\BayiSaatLahirController;
 use App\Http\Controllers\Form\FormLayananIbuLainnyaController;
 use App\Http\Controllers\Form\PelayananBayiController;
@@ -42,6 +43,9 @@ Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class,'register'])->name('register');
 Route::get('/checkiscompleteprofile', [AuthController::class,'checkIsCompleteProfile']);
 Route::middleware('auth:api')->get('/checktoken', [AuthController::class,'checkToken']);
+// routes/api.php
+Route::middleware('auth:api')->post('/fcm-token', [FcmNotificationController::class, 'saveFcmToken']);
+
 
 //Ibu
 Route::prefix('ibu')->middleware('auth:api')->group( function (){

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('genetalia');
             $table->integer('tinggi_badan');
             $table->string('berat_badan');
+            $table->text('soap')->nullable();
             $table->date('tanggal_kontrol_kembali')->nullable();
             $table->timestamps();
         });

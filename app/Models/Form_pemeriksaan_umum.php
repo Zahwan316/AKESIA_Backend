@@ -23,6 +23,7 @@ class Form_pemeriksaan_umum extends Model
         'genetalia',
         'tinggi_badan',
         'berat_badan',
+        'soap',
         'tanggal_kontrol_kembali'
     ];
 }
