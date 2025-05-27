@@ -13,10 +13,17 @@ class PendaftaranWebController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->get();
+        $tanggal = $request->query();
+
+        if($tanggal){
+            $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->whereDate('created_at', $tanggal)->paginate(10);
+        }
+        else{
+            $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->whereDate('created_at', now())->paginate(10);
+        }
 
         return view('admin.pendaftaran.index', compact('data'));
     }
@@ -78,6 +85,7 @@ class PendaftaranWebController extends Controller
 
         try{
             $data = Pendaftaran::find($id);
+            $this->verifikasi($id);
             $data->update($request->only([
                 'bidan_id', 'pelayanan_id', 'tanggal_pendaftaran', 'jam_pendaftaran', 'jam_ditentukan', 'status', 'keluhan', 'bayi_id', 'isVerif'
             ]));

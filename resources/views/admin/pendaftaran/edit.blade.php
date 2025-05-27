@@ -23,6 +23,10 @@
                             <p>{{$data->ibu->telepon}}</p>
                         </div>
                         <div class='form-group'>
+                            <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Jam Yang Ditentukan Pengguna</h4>
+                            <p>{{$data->jam_ditentukan}}</p>
+                        </div>
+                        <div class='form-group'>
                             <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Layanan yang dipilih</h4>
                             <p>{{$data->pelayanan->nama}}</p>
                         </div>
@@ -54,7 +58,9 @@
                             </div>
                         </div>
 
-                        <button id='btn-submit' type='button' class="btn btn-primary">Simpan</button>
+                        @if($data->status === 'Menunggu Konfirmasi')
+                            <button id='btn-submit' type='button' class="btn btn-primary">Simpan</button>
+                        @endif
                     </form>
                 </div>
             </div>
