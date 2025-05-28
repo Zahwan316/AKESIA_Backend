@@ -20,7 +20,7 @@
                     <th scope="col">Jenis Layanan</th>
                     <th scope="col">Harga Layanan</th>
                     <th scope="col">Keterangan</th>
-                    <th scope="col">Formulir</th>
+                    <th scope="col">Nama Formulir</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -46,7 +46,11 @@
                         <td>{{$layanan->jenis_layanan->nama}}</td>
                         <td>Rp{{number_format($layanan->harga, 0, ',', '.')}}</td>
                         <td>{{$layanan->keterangan}}</td>
-                        <td></td>
+                        <td>
+                            @foreach($layanan->formItems as $formItem)
+                                {{ $formItem->form->name }}{{ !$loop->last ? ',' : '' }}
+                            @endforeach
+                        </td>
                         <td>
                             <x-button route="{{ route('layanan.edit', $layanan->id) }}" color="btn-primary">
                                 Edit
@@ -63,12 +67,9 @@
             </tbody>
             @endif
         </table>
-
-        @if(!empty($data))
-            <div class="d-flex justify-content-center mt-3">
-                {{ $data->appends(request()->query())->links() }}
-            </div>
-        @endif
+        <div class="d-flex justify-content-center mt-3">
+            {{ $data->appends(request()->query())->links('pagination::bootstrap-5') }}
+        </div>
     </div>
 
     <script>

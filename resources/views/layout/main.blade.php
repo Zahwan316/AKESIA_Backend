@@ -20,6 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link rel="icon" href="{{asset('img/LogoBidanBunda.png')}}" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 
@@ -58,32 +59,32 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('pendaftaran.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Pendaftaran</span></a>
             </li>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('laporan.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-table"></i>
                     <span>Laporan</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('bidan.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-user-nurse"></i>
                     <span>Bidan</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('jenis_layanan.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-clipboard-list"></i>
                     <span>Jenis Pelayanan</span></a>
             </li>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{{route('layanan.index')}}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-stethoscope"></i>
                     <span>Pelayanan</span></a>
             </li>
 
@@ -200,6 +201,9 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+    <!-- Chart.js CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
 
     @if (session('error'))
         <script>

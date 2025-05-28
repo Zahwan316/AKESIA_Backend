@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthWebController;
 use App\Http\Controllers\Bidan\BidanWebController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Laporan\LaporanWebController;
 use App\Http\Controllers\Layanan\JenisPelayananWebController;
 use App\Http\Controllers\Layanan\PelayananWebController;
@@ -21,9 +22,7 @@ Route::post('/login', [AuthWebController::class, 'login'])->name('login');
 Route::post('/logout', [AuthWebController::class, 'logout'])->name('auth.logout');
 
 Route::middleware(['web', 'auth:web'])->prefix("admin")->group(function () {
-    Route::get("dashboard", function () {
-        return view('admin/dashboard');
-    })->name('admin.dashboard');
+    Route::get("dashboard", [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('pendaftaran', PendaftaranWebController::class);
     Route::put('verifikasi/pendaftaran/{id}', [PendaftaranWebController::class, 'verifikasi'])->name('pendaftaran.verifikasi');

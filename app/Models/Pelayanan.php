@@ -27,4 +27,9 @@ class Pelayanan extends Model
     public function jenis_layanan(){
         return $this->belongsTo(Jenis_layanan::class);
     }
+
+    public function formItems()
+{
+    return $this->hasMany(Pelayanan_Form_Item::class);
+}
 }

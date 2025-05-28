@@ -16,10 +16,10 @@ class LaporanWebController extends Controller
         //
         $query = $request->query('tanggal');
         if($query){
-            $data = Laporan::with('pemeriksaan', 'ibu')->whereDate('created_at', $query)->get();
+            $data = Laporan::with('pemeriksaan', 'ibu')->whereDate('created_at', $query)->paginate(4);
         }
         else{
-            $data = Laporan::with('pemeriksaan','ibu')->orderBy('created_at','desc')->get();
+            $data = Laporan::with('pemeriksaan','ibu')->orderBy('created_at','desc')->paginate(4);
         }
 
         return view('admin.laporan.index', compact('data'));
