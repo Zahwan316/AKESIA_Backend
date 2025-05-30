@@ -24,14 +24,14 @@ class PemeriksaanController extends Controller
 
         if($query){
             //$tanggal = Carbon::createFromFormat('d/m/Y', $query)->format('Y-m-d');
-            $data = Pemeriksaan::with('pelayanan', 'bayi', 'ibu.user', 'pendaftaran.bayi')
+            $data = Pemeriksaan::with('pelayanan.jenis_layanan', 'bayi', 'ibu.user', 'pendaftaran.bayi')
             ->whereDate('tanggal_kunjungan', $query)
             ->orderBy('created_at', 'desc')
             ->get();
         }
         else
         {
-            $data= Pemeriksaan::with('pelayanan', 'bayi', 'ibu.user', 'pendaftaran')
+            $data= Pemeriksaan::with('pelayanan.jenis_layanan', 'bayi', 'ibu.user', 'pendaftaran')
             ->orderBy('created_at', 'desc')
             ->get();
         }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Form;
 use App\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Form_riwayat_kehamilan_sekarang;
+use App\Models\Ibu;
+use App\Models\Pemeriksaan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RiwayatKehamilanSekarangController extends Controller
@@ -58,6 +61,14 @@ class RiwayatKehamilanSekarangController extends Controller
 
         try{
             $data = Form_riwayat_kehamilan_sekarang::create($request->all());
+
+            //simpan data hpht ibu jika belum diset
+            $pemeriksaan = Pemeriksaan::find($request->pemeriksaan_id);
+            $ibu = Ibu::find($pemeriksaan->ibu_id);
+            if($ibu->hpht === null){
+                $ibu->hpht = $request->hpht;
+                $ibu->save();
+            }
             return $this->apiResponse('Data berhasil ditambahkan', $data);
         }
         catch(\Exception $e){
@@ -147,7 +158,48 @@ class RiwayatKehamilanSekarangController extends Controller
         //
     }
     public function showFormByPendaftaran(string $id){
-        $data = Form_riwayat_kehamilan_sekarang::where('pemeriksaan_id', $id)->first();
-        return $this->apiResponse('Data berhasil diambil', $data);
+        /*  $data = Form_riwayat_kehamilan_sekarang::where('pemeriksaan_id', $id)->first();
+        return $this->apiResponse('Data berhasil diambil', $data); */
+        $existing = Form_riwayat_kehamilan_sekarang::where('pemeriksaan_id', $id)->first();
+
+        if ($existing) {
+            // Jika ada, kirim datanya agar form terisi otomatis
+            return $this->apiResponse('Data ditemukan dan akan digunakan untuk mengisi form', $existing);
+        } else {
+            $currentPemeriksaan = Pemeriksaan::find($id);
+            if (!$currentPemeriksaan) {
+                return $this->apiResponse('Pemeriksaan tidak ditemukan', null, 404);
+            }
+            // Ambil latest form dari ibu yang sama
+            $latest = Form_riwayat_kehamilan_sekarang::whereHas('pemeriksaan', function ($query) use ($currentPemeriksaan) {
+                $query->where('ibu_id', $currentPemeriksaan->ibu_id);
+            })->latest()->first();
+
+            if ($latest) {
+                return $this->apiResponse('Form baru, mengisi dengan data terakhir dari ibu yang sama', $latest);
+            }
+            // Kalau ibu belum pernah isi form, prefill kosong
+            $prefill = [
+                'pemeriksaan_id' => $currentPemeriksaan->id,
+                'gravida' => null,
+                'partus' => null,
+                'rr_rt' => null,
+                'hpl' => null,
+                'hpht' => null,
+                'muntah' => null,
+                'pusing' => null,
+                'nyeri_perut' => null,
+                'nafsu_makan' => null,
+                'pendarahan' => null,
+                'riwayat_penyakit' => null,
+                'kebiasaan' => null,
+                'riwayat_penyakit_keluarga' => null,
+                'keluhan' => null,
+            ];
+            return $this->apiResponse('Belum ada data, form akan kosong', null);
+
+            // Kirim data terakhir sebagai referensi untuk isian form baru (jika ada)
+            //return $this->apiResponse('Form baru, mengisi dengan data terakhir (jika ada)', $latest ?? []);
+        }
     }
 }

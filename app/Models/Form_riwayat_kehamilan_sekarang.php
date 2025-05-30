@@ -28,4 +28,8 @@ class Form_riwayat_kehamilan_sekarang extends Model
         'pasangan_sexual_suami',
         'mendiskusikan_hiv'
     ];
+
+    public function pemeriksaan(){
+        return $this->belongsTo(Pemeriksaan::class);
+    }
 }

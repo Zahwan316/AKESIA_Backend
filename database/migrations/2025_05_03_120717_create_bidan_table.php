@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('tempat_bekerja', 120)->nullable();
             $table->string('status_keanggotaan_ibi');
             //$table->string('nama_tempat_praktik', 120);
-            $table->integer('no_STR')->unsigned()->nullable();
-            $table->integer('no_SIP')->unsigned()->nullable();
+            $table->string('no_STR', 42)->nullable();
+            $table->string('no_SIP', 42)->nullable();
             $table->timestamps();
         });
     }

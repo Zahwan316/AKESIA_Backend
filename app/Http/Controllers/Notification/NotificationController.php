@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Notification;
 
 use App\apiResponse;
 use App\Http\Controllers\Controller;
-use App\Models\Notification;
+use App\Models\Notifications;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
@@ -19,10 +19,10 @@ class NotificationController extends Controller
         $getCurrUserNotif = $request->query('user_id');
 
         if($getCurrUserNotif){
-            $data = Notification::where('user_id', $getCurrUserNotif)->get();
+            $data = Notifications::where('user_id', $getCurrUserNotif)->get();
         }
         else{
-            $data = Notification::orderBy("created_at","desc")->get();
+            $data = Notifications::orderBy("created_at","desc")->get();
         }
 
         return $this->apiResponse('Data berhasil diambil', $data);
@@ -49,7 +49,7 @@ class NotificationController extends Controller
         ]);
 
         try{
-            $data = Notification::create($request->only([
+            $data = Notifications::create($request->only([
                 'user_id', 'title', 'message'
             ]));
         }
@@ -64,7 +64,7 @@ class NotificationController extends Controller
     public function show(string $id)
     {
         //
-        $data = Notification::find($id);
+        $data = Notifications::find($id);
 
         return $this->apiResponse('Data berhasil diambil', $data);
     }

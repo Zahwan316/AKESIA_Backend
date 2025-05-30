@@ -26,4 +26,8 @@ class Form_pemeriksaan_umum extends Model
         'soap',
         'tanggal_kontrol_kembali'
     ];
+
+    public function pemeriksaan(){
+        return $this->belongsTo(Pemeriksaan::class);
+    }
 }

@@ -87,7 +87,7 @@ class BidanController extends Controller
             return $this->apiResponse('Data berhasil disimpan', $Bidan, 201, false);
         }
         catch(\Exception $e){
-            return $this->apiResponse('Gagal menyimpan data', $e->getMessage(), 500, true);
+            return $this->apiResponse($e->getMessage(), $e->getMessage(), 500, true);
         }
     }
 
@@ -210,4 +210,10 @@ class BidanController extends Controller
             return $this->apiResponse('Gagal menghapus data', $e->getMessage(), 500, true);
         }
     }
+
+    public function getCurrBidan(){
+        $data = Bidan::with('user')->where("user_id",auth()->guard()->user()->id)->first();
+        return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
+    }
 }
+

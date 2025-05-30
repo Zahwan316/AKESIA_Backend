@@ -10,7 +10,7 @@ use App\Models\User;
 class IbuController extends Controller
 {
     public function GetDataIbu(string $user_id){
-        $data = Ibu::with('User')->where("user_id",$user_id)->get();
+        $data = Ibu::with('User')->where("user_id",$user_id)->first();
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
     }
 

@@ -72,6 +72,7 @@ class PendaftaranController extends Controller
                 'pelayanan_id' => $request->pelayanan_id,
                 'tanggal_pendaftaran' => $request->tanggal_pendaftaran,
                 'jam_pendaftaran' => $request->jam_pendaftaran,
+                'jam_ditentukan' => $request->jam_ditentukan,
                 'status' => 'Menunggu Konfirmasi',
                 'keluhan' => $request->keluhan,
                 'bayi_id' => $request->bayi_id,

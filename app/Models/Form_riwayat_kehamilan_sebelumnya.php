@@ -20,4 +20,8 @@ class Form_riwayat_kehamilan_sebelumnya extends Model
         'tempat_persalinan',
         'keterangan',
     ];
+
+    public function pemeriksaan(){
+        return $this->belongsTo(Pemeriksaan::class);
+    }
 }

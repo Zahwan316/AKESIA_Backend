@@ -6,6 +6,7 @@ use App\apiResponse;
 use App\Http\Controllers\Controller;
 use App\Models\Form_pemeriksaan_umum;
 use App\Models\Notifications;
+use App\Models\Pemeriksaan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
@@ -67,12 +68,12 @@ class PemeriksaanUmum extends Controller
                 'title' => 'Haloo mak',
                 'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
             ]);
+
+            //handle send notification to mobile
             Carbon::setLocale('id');
             $tanggal = Carbon::parse($request->tanggal_kontrol_kembali)->translatedFormat('l, d F Y');
 
-
-
-            $user = User::findOrFail(auth()->guard()->user()->id);
+            $user = User::findOrFail($request->user_id);
             if ($user->fcm_token) {
                 $messaging = (new Factory)
                     ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
@@ -101,7 +102,8 @@ class PemeriksaanUmum extends Controller
                 'tinggi_badan',
                 'berat_badan',
                 'pemeriksaan_id',
-                'tanggal_kontrol_kembali'
+                'tanggal_kontrol_kembali',
+                'soap'
             ]));
 
             return $this->apiResponse('Data berhasil dibuat', $data);
@@ -159,10 +161,12 @@ class PemeriksaanUmum extends Controller
                 'title' => 'Haloo mak',
                 'message' => 'Kontrol lagi yuk di tanggal '. $request->tanggal_kontrol_kembali,
             ]);
+
+            //handle send notification to mobile
             Carbon::setLocale('id');
             $tanggal = Carbon::parse($request->tanggal_kontrol_kembali)->translatedFormat('l, d F Y');
 
-            $user = User::findOrFail(auth()->guard()->user()->id);
+            $user = User::findOrFail($request->user_id);
             if ($user->fcm_token) {
                 $messaging = (new Factory)
                     ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
@@ -192,7 +196,8 @@ class PemeriksaanUmum extends Controller
                 'tinggi_badan',
                 'berat_badan',
                 'pemeriksaan_id',
-                'tanggal_kontrol_kembali'
+                'tanggal_kontrol_kembali',
+                'soap'
             ]));
 
             return $this->apiResponse('Data berhasil diubah', $data);
@@ -211,7 +216,43 @@ class PemeriksaanUmum extends Controller
     }
 
     public function showFormByPendaftaran(string $id){
-        $data = Form_pemeriksaan_umum::where('pemeriksaan_id', $id)->first();
-        return $this->apiResponse('Data berhasil diambil', $data);
+        $existing = Form_pemeriksaan_umum::where('pemeriksaan_id', $id)->first();
+
+        if ($existing) {
+            // Jika ada, kirim datanya agar form terisi otomatis
+            return $this->apiResponse('Data ditemukan dan akan digunakan untuk mengisi form', $existing);
+        } else {
+            $currentPemeriksaan = Pemeriksaan::find($id);
+            if (!$currentPemeriksaan) {
+                return $this->apiResponse('Pemeriksaan tidak ditemukan', null, 404);
+            }
+            // Ambil latest form dari ibu yang sama
+            $latest = Form_pemeriksaan_umum::whereHas('pemeriksaan', function ($query) use ($currentPemeriksaan) {
+                $query->where('ibu_id', $currentPemeriksaan->ibu_id);
+            })->latest()->first();
+
+            if ($latest) {
+                return $this->apiResponse('Form baru, mengisi dengan data terakhir dari ibu yang sama', $latest);
+            }
+            // Kalau ibu belum pernah isi form, prefill kosong
+            $prefill = [
+                'pemeriksaan_id' => $currentPemeriksaan->id,
+                'bentuk_tubuh' => null,
+                'kesadaran_id' => null,
+                'mata' => null,
+                'leher' => null,
+                'payudara' => null,
+                'paru' => null,
+                'jantung' => null,
+                'hati' => null,
+                'suhu_badan' => null,
+                'genetalia' => null,
+                'tinggi_badan' => null,
+                'berat_badan' => null,
+                'tanggal_kontrol_kembali' => null,
+                'soap' => null,
+            ];
+            return $this->apiResponse('Belum ada data, form akan kosong', null);
+        }
     }
 }

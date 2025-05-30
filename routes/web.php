@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthWebController;
 use App\Http\Controllers\Bidan\BidanWebController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Laporan\LaporanWebController;
+use App\Http\Controllers\Layanan\ImportLayananWebController;
 use App\Http\Controllers\Layanan\JenisPelayananWebController;
 use App\Http\Controllers\Layanan\PelayananWebController;
 use App\Http\Controllers\Pendaftaran\PendaftaranWebController;
@@ -31,6 +32,10 @@ Route::middleware(['web', 'auth:web'])->prefix("admin")->group(function () {
     Route::resource('bidan', BidanWebController::class);
     Route::resource('jenis_layanan', JenisPelayananWebController::class);
     Route::resource('layanan', PelayananWebController::class);
+
+    Route::get('/import/layanan', [ImportLayananWebController::class, 'importForm'])->name('layanan.import.form');
+    Route::post('/import/layanan', [ImportLayananWebController::class, 'import'])->name('layanan.import');
+
 });
 
 

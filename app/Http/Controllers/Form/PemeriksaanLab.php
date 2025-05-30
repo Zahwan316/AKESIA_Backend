@@ -114,7 +114,7 @@ class PemeriksaanLab extends Controller
                 'soap',
                 'penatalaksanaan'
             ]));
-            return $this->apiResponse('Data berhasil disimpan', $data);
+            return $this->apiResponse('Data berhasil diubah', $data);
         }
         catch(\Exception $e){
             return $this->apiResponse($e->getMessage(), $validate,500, true);

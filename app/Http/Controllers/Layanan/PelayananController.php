@@ -18,10 +18,10 @@ class PelayananController extends Controller
         $pelayananWithJenisId = $request->query('jenis_layanan_id');
 
         if($pelayananWithJenisId){
-            $data = Pelayanan::where('jenis_layanan_id', $pelayananWithJenisId)->get();
+            $data = Pelayanan::with('jenis_layanan')->where('jenis_layanan_id', $pelayananWithJenisId)->get();
         }
         else{
-            $data = Pelayanan::all();
+            $data = Pelayanan::with('jenis_layanan')->get();
         }
 
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $data, 'status_code' => 200, 'error' => false], 200);
@@ -71,7 +71,7 @@ class PelayananController extends Controller
     public function show(string $id)
     {
         //
-        $pelayanan = Pelayanan::find($id);
+        $pelayanan = Pelayanan::with('jenis_layanan')->find($id);
         return response()->json(['Message' => 'Data berhasil diambil', 'data' => $pelayanan, 'status_code' => 200, 'error' => false], 200);
     }
 

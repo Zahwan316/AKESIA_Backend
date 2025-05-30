@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Pendaftaran;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bidan;
+use App\Models\Ibu;
 use App\Models\Pemeriksaan;
 use App\Models\Pendaftaran;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Kreait\Firebase\Factory;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Notification;
 
 class PendaftaranWebController extends Controller
 {
@@ -85,10 +90,26 @@ class PendaftaranWebController extends Controller
 
         try{
             $data = Pendaftaran::find($id);
-            $this->verifikasi($id);
             $data->update($request->only([
                 'bidan_id', 'pelayanan_id', 'tanggal_pendaftaran', 'jam_pendaftaran', 'jam_ditentukan', 'status', 'keluhan', 'bayi_id', 'isVerif'
             ]));
+            $this->verifikasi($data);
+
+            $ibu = Ibu::find($data->ibu_id);
+            $user = User::findOrFail($ibu->user_id);
+            if ($user->fcm_token) {
+                $messaging = (new Factory)
+                    ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
+                    ->createMessaging();
+
+                $message = CloudMessage::withTarget('token', $user->fcm_token)
+                    ->withNotification(Notification::create(
+                        'Halo Bu',
+                        'Pendaftaran ibu sudah diterima nih sama admin, jangan lupa untuk datang sesusai jadwal'
+                    ));
+
+                $messaging->send($message);
+            }
             return redirect()->route('pendaftaran.index')->with('success', 'Data berhasil disimpan');
         }
         catch(\Exception $e){
@@ -104,7 +125,26 @@ class PendaftaranWebController extends Controller
         //
     }
 
-    public function verifikasi(string $id){
+    public function verifikasi(Pendaftaran $data){
+
+        $data->isVerif = 1;
+        $data->save();
+
+        Pemeriksaan::create([
+            'pendaftaran_id' => $data->id,
+            'bidan_id' => $data->bidan_id,
+            'pelayanan_id' => $data->pelayanan_id,
+            'ibu_id' => $data->ibu_id,
+            'tanggal_kunjungan' => $data->tanggal_pendaftaran,
+            'jam_kunjungan' => $data->jam_ditentukan,
+            'harga' => $data->pelayanan->harga,
+        ]);
+
+
+        //return redirect()->route('pendaftaran.index')->with('success', 'Berhasil Diverifikasi');
+    }
+
+    /* public function verifikasi(string $id){
         $data = Pendaftaran::find($id);
         if($data->bidan_id === null){
             return redirect()->route('pendaftaran.index')->with('error', 'Tentukan terlebih dahulu untuk bidan dan jam pemeriksaan!!');
@@ -125,5 +165,5 @@ class PendaftaranWebController extends Controller
 
 
         return redirect()->route('pendaftaran.index')->with('success', 'Berhasil Diverifikasi');
-    }
+    } */
 }

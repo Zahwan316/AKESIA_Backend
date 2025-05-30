@@ -58,6 +58,7 @@ Route::prefix('ibu')->middleware('auth:api')->group( function (){
 
 //User
 Route::middleware('auth:api')->resource('bidan', BidanController::class);
+Route::middleware('auth:api')->get('getCurrBidan', [BidanController::class, 'getCurrBidan']);
 Route::middleware('auth:api')->resource('pendaftaran', PendaftaranController::class);
 Route::middleware('auth:api')->get('getCurrUserPendaftaran', [PendaftaranController::class, 'getCurrUserPendaftaran']);
 Route::middleware('auth:api')->resource('bayi', BayiController::class);
