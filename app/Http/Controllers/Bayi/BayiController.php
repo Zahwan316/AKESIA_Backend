@@ -104,7 +104,7 @@ class BayiController extends Controller
             'ibu_id' => 'nullable|exists:ibus,id',
             'nama_lengkap' => 'nullable|string|max:100',
             'jenis_kelamin' => 'nullable|string|max:2',
-            'nik' => 'nullable|string|size:16|unique:bayis,nik',
+            'nik' => 'nullable|string|size:16',
             'golongan_darah' => 'nullable|string|max:4',
             'tempat_lahir' => 'nullable|string',
             'tanggal_lahir' => 'nullable|date',

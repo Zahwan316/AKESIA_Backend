@@ -36,10 +36,10 @@ class PemeriksaanLab extends Controller
         //
         $validate = $request->validate([
             'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
-            'tanggal_pemeriksaan' => 'required|date',
-            'jam_pemeriksaan' => 'required|date_format:H:i',
-            'nama' => 'required|string|max:255',
-            'hasil' => 'required|string|max:255',
+            'tanggal_pemeriksaan' => 'nullable|date',
+            'jam_pemeriksaan' => 'nullable|date_format:H:i',
+            'nama' => 'nullable|string|max:255',
+            'hasil' => 'nullable|string|max:255',
             'tanggal_pelayanan' => 'required|date',
             'jam_pelayanan' => 'required|date_format:H:i',
             'soap' => 'required|string|max:255',

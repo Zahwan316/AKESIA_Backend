@@ -37,7 +37,7 @@ class PelayananIbuBersalinController extends Controller
         $validate = $request->validate([
             'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'tanggal_persalinan' => 'required|date',
-            'jam_lahir' => 'required|date_format:H:i',
+            'jam_lahir' => 'required',
             'umur_kehamilan' => 'required|integer|between:1,42',
             'penolong_persalinan' => 'required|string',
             'cara_persalinan' => 'required|string',
