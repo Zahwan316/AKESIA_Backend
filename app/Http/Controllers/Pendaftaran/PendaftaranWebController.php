@@ -24,10 +24,10 @@ class PendaftaranWebController extends Controller
         $tanggal = $request->query();
 
         if($tanggal){
-            $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->whereDate('created_at', $tanggal)->paginate(10);
+            $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->whereDate('tanggal_pendaftaran', $tanggal)->paginate(10);
         }
         else{
-            $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->whereDate('created_at', now())->paginate(10);
+            $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->whereDate('created_at', now())->orderBy('jam_ditentukan', 'desc')->paginate(10);
         }
 
         return view('admin.pendaftaran.index', compact('data'));

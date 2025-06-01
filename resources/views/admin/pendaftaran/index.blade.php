@@ -22,7 +22,7 @@
                     <th scope="col">Nomor Telepon</th>
                     <th scope="col">Layanan</th>
                     <th scope="col">Jam</th>
-                    <th scope="col">Tanggal Pendaftaran</th>
+                    <th scope="col">Tanggal Ditentukan</th>
                     <th scope="col">Keluhan</th>
 
                     <th scope="col">Status</th>

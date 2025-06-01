@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('form_pemeriksaan_lab', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
-            $table->date('tanggal_pemeriksaan');
-            $table->time('jam_pemeriksaan');
-            $table->string('nama');
-            $table->text('hasil');
-            $table->date('tanggal_pelayanan');
-            $table->time('jam_pelayanan');
-            $table->string('soap');
-            $table->string('penatalaksanaan');
+            $table->date('tanggal_pemeriksaan')->nullable();
+            $table->time('jam_pemeriksaan')->nullable();
+            $table->string('nama')->nullable();
+            $table->text('hasil')->nullable();
+            $table->date('tanggal_pelayanan')->nullable();
+            $table->time('jam_pelayanan')->nullable();
+            $table->string('soap')->nullable();
+            $table->string('penatalaksanaan')->nullable();
             $table->timestamps();
         });
     }
