@@ -46,6 +46,14 @@
                 <label for="">No SIP</label>
                 <input type="number" id='only-number' class='form-control' name="no_sip" id="" value={{$data->no_SIP}} {{old('no_SIP', $data->no_SIP)}}>
             </div>
+            <div class="form-group">
+                <label for="">Email</label>
+                <input type="email" class='form-control' name="email" id="" value={{$data->user->email}} {{old('email', $data->user->email)}}>
+            </div>
+            <div class="form-group">
+                <label for="">Ubah Password</label>
+                <input type="password" class='form-control' name="password" id=""  {{old('password', $data->user->password)}}>
+            </div>
 
             <x-button type='submit'>
                 Ubah

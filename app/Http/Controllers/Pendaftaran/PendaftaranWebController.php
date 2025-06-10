@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
+use Kreait\Firebase\Exception\Messaging\NotFound;
+use Illuminate\Support\Facades\Log;
+
 
 class PendaftaranWebController extends Controller
 {
@@ -55,7 +58,7 @@ class PendaftaranWebController extends Controller
     public function show(string $id)
     {
         //
-        $data = Pendaftaran::with(['pelayanan', 'ibu.user'])->find($id);
+        $data = Pendaftaran::with(['pelayanan', 'ibu.user', 'bidan.user'])->find($id);
         //dd($id, $data);
         $bidan = Bidan::with('user')->get();
 
@@ -96,7 +99,9 @@ class PendaftaranWebController extends Controller
             $this->verifikasi($data);
 
             $ibu = Ibu::find($data->ibu_id);
+            $bidan = Bidan::find($data->bidan_id);
             $user = User::findOrFail($ibu->user_id);
+            $bidanUser = User::findOrFail($bidan->user_id);
             if ($user->fcm_token) {
                 $messaging = (new Factory)
                     ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
@@ -106,10 +111,43 @@ class PendaftaranWebController extends Controller
                     ->withNotification(Notification::create(
                         'Halo Bu',
                         'Pendaftaran ibu sudah diterima nih sama admin, jangan lupa untuk datang sesusai jadwal'
-                    ));
+                    ))
+                    ->withData([
+                        'type' => 'pendaftaran_baru',
+                        'user_id' => (string) $user->id, // opsional
+                    ]);
 
                 $messaging->send($message);
             }
+
+            try{
+                if($bidanUser->fcm_token){
+                    $messaging = (new Factory)
+                    ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
+                    ->createMessaging();
+
+                    $message = CloudMessage::withTarget('token', $bidanUser->fcm_token)
+                        ->withNotification(Notification::create(
+                            'Halo '.$bidanUser->nama_lengkap,
+                            'Ada pemeriksaan baru nih, jangan lupa di cek data pemeriksaannya'
+                        ))
+                        ->withData([
+                            'type' => 'pemeriksaan_baru',
+                            'user_id' => (string) $bidanUser->id, // opsional
+                        ]);
+
+                    $messaging->send($message);
+                }
+            }
+            catch (NotFound $e) {
+                // Token tidak valid → hapus dari database
+                $bidanUser->update(['fcm_token' => null]);
+
+                Log::warning("FCM token invalid, telah dihapus untuk user ID: {$bidanUser->id}");
+            } catch (\Exception $e) {
+                Log::error("Gagal kirim notifikasi: " . $e->getMessage());
+            }
+
             return redirect()->route('pendaftaran.index')->with('success', 'Data berhasil disimpan');
         }
         catch(\Exception $e){

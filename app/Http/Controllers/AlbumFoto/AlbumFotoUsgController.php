@@ -63,7 +63,7 @@ class AlbumFotoUsgController extends Controller
     public function show(string $id)
     {
         //
-        $data = Album_foto_usg::find($id)->first();
+        $data = Album_foto_usg::findOrFail($id);
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 

@@ -38,7 +38,7 @@ class PelayananBayiController extends Controller
         $validate = $request->validate([
             'pemeriksaan_id' => 'required|integer|exists:pemeriksaans,id',
             'nama_bayi' => 'required|string|max:255',
-            'umur_bayi' => 'required|integer',
+            'tanggal_lahir' => 'required|date',
             'jenis_kelamin_bayi' => 'required|string',
             'booking_layanan' => 'required|string|max:255',
             'keterangan_kondisi_bayi' => 'required|string|max:255',
@@ -49,7 +49,7 @@ class PelayananBayiController extends Controller
             $data = Form_Pelayanan_Bayi::create( $request->only([
                 'pemeriksaan_id',
                 'nama_bayi',
-                'umur_bayi',
+                'tanggal_lahir',
                 'jenis_kelamin_bayi',
                 'booking_layanan',
                 'keterangan_kondisi_bayi',
@@ -89,7 +89,7 @@ class PelayananBayiController extends Controller
         $validate = $request->validate([
             'pemeriksaan_id' => 'nullable|exists:pemeriksaans,id',
             'nama_bayi' => 'nullable|string|max:255',
-            'umur_bayi' => 'nullable|integer|min:0',
+            'tanggal_lahir' => 'nullable|date|min:0',
             'jenis_kelamin_bayi' => 'nullable|string',
             'booking_layanan' => 'nullable|string|max:255',
             'keterangan_kondisi_bayi' => 'nullable|string',
@@ -101,7 +101,7 @@ class PelayananBayiController extends Controller
             $data->update($request->only([
                 'pemeriksaan_id',
                 'nama_bayi',
-                'umur_bayi',
+                'tanggal_lahir',
                 'jenis_kelamin_bayi',
                 'booking_layanan',
                 'keterangan_kondisi_bayi',

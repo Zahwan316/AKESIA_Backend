@@ -8,6 +8,7 @@ use App\Models\Ref_Kota;
 use App\Models\Ref_Provinsi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class BidanWebController extends Controller
 {
@@ -94,17 +95,22 @@ class BidanWebController extends Controller
             'status_keanggotaan_ibi' => 'nullable',
             'no_STR' => 'nullable|number',
             'no_SIP' => 'nullable|number',
+            'email' => 'nullable|email',
+            'password' => 'nullable|min:8'
         ]);
 
         try{
-            $user = User::findOrFail($id);
-            $user->update([
-                'nama_lengkap' => $request->nama_lengkap
-            ]);
             $data = Bidan::findOrFail($id);
             $data->update($request->only([
                 'provinsi_id', 'kota_id', 'status_keanggotaan_ibi', 'no_STR', 'no_SIP'
             ]));
+
+            $user = User::findOrFail($data->user_id);
+            $user->update([
+                'nama_lengkap' => $request->nama_lengkap,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
 
             return redirect()->route('bidan.index')->with('success','Data berhasil diubah');
         }

@@ -20,7 +20,7 @@ Route::get('/login', function() {
 })->name('web/login');
 
 Route::post('/login', [AuthWebController::class, 'login'])->name('login');
-Route::post('/logout', [AuthWebController::class, 'logout'])->name('auth.logout');
+Route::post('/logout', [AuthWebController::class, 'logout'])->name('web.logout')->middleware('auth:web');
 
 Route::middleware(['web', 'auth:web'])->prefix("admin")->group(function () {
     Route::get("dashboard", [DashboardController::class, 'index'])->name('admin.dashboard');

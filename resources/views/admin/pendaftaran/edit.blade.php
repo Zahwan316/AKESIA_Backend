@@ -34,32 +34,43 @@
                             <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Keluhan</h4>
                             <p>{{$data->keluhan}}</p>
                         </div>
-                        <div class='form-group'>
-                            <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Status</h4>
-                            <select class='form-control' name='status' id='form-status'>
-                                <option value=''>Tentukan Status</option>
-                                <option value='Disetujui'>Disetujui</option>
-                                <option value='Dibatalkan'>Dibatalkan</option>
-                            </select>
-                        </div>
-                        <div id='disetujui-container' style='display: none;'>
-                           {{--  <div class='form-group'>
-                                <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Tentukan Jam</h4>
-                                <input type="time"  name="jam_ditentukan" class="form-control" placeholder="00:00">
-                            </div> --}}
+                        @if($data->status === 'Menunggu Konfirmasi')
                             <div class='form-group'>
-                                <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Bidan yang melayani</h4>
-                                <select class='form-control' name='bidan_id'>
-                                    <option value=''>Pilih Bidan</option>
-                                    @foreach ($bidan as $data_bidan )
-                                        <option value='{{$data_bidan->id}}'>{{$data_bidan->user->nama_lengkap}}</option>
-                                    @endforeach
+                                <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Status</h4>
+                                <select class='form-control' name='status' id='form-status'>
+                                    <option value=''>Tentukan Status</option>
+                                    <option value='Disetujui'>Disetujui</option>
+                                    <option value='Dibatalkan'>Dibatalkan</option>
                                 </select>
                             </div>
-                        </div>
+                            <div id='disetujui-container' style='display: none;'>
+                            {{--  <div class='form-group'>
+                                    <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Tentukan Jam</h4>
+                                    <input type="time"  name="jam_ditentukan" class="form-control" placeholder="00:00">
+                                </div> --}}
+                                <div class='form-group'>
+                                    <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Bidan yang melayani</h4>
+                                    <select class='form-control' name='bidan_id'>
+                                        <option value=''>Pilih Bidan</option>
+                                        @foreach ($bidan as $data_bidan )
+                                            <option value='{{$data_bidan->id}}'>{{$data_bidan->user->nama_lengkap}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
 
-                        @if($data->status === 'Menunggu Konfirmasi')
-                            <button id='btn-submit' type='button' class="btn btn-primary">Simpan</button>
+                            @if($data->status === 'Menunggu Konfirmasi')
+                                <button id='btn-submit' type='button' class="btn btn-primary">Simpan</button>
+                            @endif
+                        @else
+                            <div class='form-group'>
+                                <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Status</h4>
+                                <p>{{$data->status}}</p>
+                            </div>
+                            <div class='form-group'>
+                                <h4 class='fw-bold' style='font-weight: bold; font-size: 20'>Bidan yang melayani</h4>
+                                <p>{{$data->bidan->user->nama_lengkap}}</p>
+                            </div>
                         @endif
                     </form>
                 </div>

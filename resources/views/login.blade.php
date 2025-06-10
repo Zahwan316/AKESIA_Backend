@@ -35,7 +35,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image " style='display: flex; justify-content: center; align-items: center;'>
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image border " style='height: 100%; display: flex; justify-content: center; align-items: center;'>
                                 <img src='{{asset('img/LogoBidanBunda.png')}}' class='mx-auto my-auto d-block' style='max-width: 50%;'/>
                             </div>
                             <div class="col-lg-6">

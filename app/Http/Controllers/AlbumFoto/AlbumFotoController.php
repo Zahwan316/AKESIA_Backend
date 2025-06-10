@@ -40,7 +40,7 @@ class AlbumFotoController extends Controller
         $validate = $request->validate([
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
             'usg_id' => 'required|exists:album_foto_usgs,id',
-            'judul' => 'required|string',
+            'judul' => 'nullable|string',
             'caption' => 'nullable|string',
             'tanggal' => 'nullable'
         ]);
@@ -79,7 +79,7 @@ class AlbumFotoController extends Controller
     public function show(string $id)
     {
         //
-        $data = Album_foto::find($id);
+        $data = Album_foto::with('uploads')->find($id);
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 
@@ -112,19 +112,20 @@ class AlbumFotoController extends Controller
                 $path = $request->file('img')->store('uploads', 'public'); // disimpan di storage/app/public/uploads
                 // 2. Simpan ke tabel uploads
                 $upload = Upload::create([
-                    'path' => 'storage/' . $path, // jika ingin bisa diakses langsung lewat URL
-                    'user_id' => auth()->guard()->user()->id,    // atau sesuai kebutuhan kamu
+                    'path' => 'storage/' . $path,
+                    'user_id' => auth()->guard()->user()->id,
                 ]);
                 $data->img_id = $upload->id;
+                /* $data->update([
+                    'img_id' => $upload->id,
+                    'judul' => $request->judul,
+                    'caption' => $request->caption,
+                    'tanggal' => $request->tanggal,
+                ]); */
+                $data->save();
 
             }
-            $data->update([
-                'judul' => $request->judul,
-                'caption' => $request->caption,
-                'tanggal' => $request->tanggal,
-            ]);
-            $data->save();
-            return $this->apiResponse('Data berhasil diupdate', $data);
+            return $this->apiResponse('Data berhasil diedit', $data);
             }
         catch(\Exception $e){
             return $this->apiResponse($e->getMessage(), null, 400, true);

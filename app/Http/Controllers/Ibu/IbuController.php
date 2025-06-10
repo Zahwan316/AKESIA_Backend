@@ -34,12 +34,15 @@ class IbuController extends Controller
             'pendidikan' => 'required',
             'pekerjaan' => 'required',
             'alamat_domisili' => 'required',
-            'telepon' => 'required|unique:ibus',
+            'telepon' => ['required', 'regex:/^(\+62|62|0)8[1-9][0-9]{6,9}$/', 'digits_between:10,13'],
             'nama_lengkap' => 'required',
             'berat_badan' => 'nullable',
             'tinggi_badan' => 'nullable',
             'usia_kehamilan' => 'nullable',
             'hpht' => 'nullable'
+        ],[
+            'telepon.required' => 'Nomor telepon wajib diisi.',
+            'telepon.regex' => 'Format nomor telepon tidak valid. Gunakan format Indonesia seperti 081234567890.',
         ]);
 
     try{

@@ -88,6 +88,16 @@
                     <span>Pelayanan</span></a>
             </li>
 
+            <li class="nav-item active">
+                <form class="nav-link" action="{{route('web.logout')}}" method="POST">
+                    @csrf
+                    <button type="submit" style="background: none; border: none; color: white; font-weight: bold;">
+                        <i class="fas fa-fw fa-door"></i>
+                        <span>Keluar</span>
+                    </button>
+                </form>
+            </li>
+
 
 
         </ul>

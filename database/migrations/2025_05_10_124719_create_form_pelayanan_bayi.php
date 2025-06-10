@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pemeriksaan_id')->constrained('pemeriksaans')->cascadeOnDelete();
             $table->string('nama_bayi');
-            $table->integer('umur_bayi');
+            $table->date('tanggal_lahir');
             $table->string('jenis_kelamin_bayi');
             $table->string('booking_layanan');
             $table->string('keterangan_kondisi_bayi');

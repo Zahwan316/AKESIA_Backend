@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('img_id')->constrained('uploads')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('usg_id')->constrained('album_foto_usgs')->onDelete('cascade');
-            $table->string('judul');
+            $table->string('judul')->nullable();
             $table->text('caption')->nullable();
             $table->date('tanggal')->nullable();
             $table->timestamps();

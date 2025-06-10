@@ -45,6 +45,7 @@ Route::get('/checkiscompleteprofile', [AuthController::class,'checkIsCompletePro
 Route::middleware('auth:api')->get('/checktoken', [AuthController::class,'checkToken']);
 // routes/api.php
 Route::middleware('auth:api')->post('/fcm-token', [FcmNotificationController::class, 'saveFcmToken']);
+Route::post('/auth/google', [AuthController::class, 'googleLogin']);
 
 
 //Ibu

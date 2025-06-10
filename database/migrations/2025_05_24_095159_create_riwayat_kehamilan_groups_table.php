@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('riwayat_kehamilan_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('nama');
+            $table->string('nama')->nullable;
             $table->timestamps();
         });
     }

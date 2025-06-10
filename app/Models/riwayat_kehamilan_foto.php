@@ -12,7 +12,7 @@ class riwayat_kehamilan_foto extends Model
         'user_id', 'img_id', 'riwayat_kehamilan_group_id', 'nama'
     ];
 
-    public function upload(){
+    public function uploads(){
         return  $this->belongsTo(Upload::class, 'img_id');
     }
 }

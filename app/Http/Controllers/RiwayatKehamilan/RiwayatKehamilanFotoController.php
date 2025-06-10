@@ -19,7 +19,7 @@ class RiwayatKehamilanFotoController extends Controller
     public function index()
     {
         //
-        $data = riwayat_kehamilan_foto::with('upload')->get();
+        $data = riwayat_kehamilan_foto::with('uploads')->get();
 
         return $this->apiResponse('Data berhasil diambil', $data);
     }
@@ -72,7 +72,7 @@ class RiwayatKehamilanFotoController extends Controller
     public function show(string $id)
     {
         //
-        $data = riwayat_kehamilan_foto::with('upload')->findOrFail($id);
+        $data = riwayat_kehamilan_foto::with('uploads')->findOrFail($id);
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 
@@ -91,8 +91,9 @@ class RiwayatKehamilanFotoController extends Controller
     {
         //
         $validate = $request->validate([
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
             'nama' => 'nullable',
-            'riwayat_kehamilan_group_id' => 'nullable'
+            //'riwayat_kehamilan_group_id' => 'nullable'
         ]);
         try{
             $data = riwayat_kehamilan_foto::findOrFail($id);
@@ -108,7 +109,7 @@ class RiwayatKehamilanFotoController extends Controller
             }
             $data->update($request->only([
                 'nama',
-                'riwayat_kehamilan_group_id'
+                //'riwayat_kehamilan_group_id'
             ]));
             $data->save();
             return $this->apiResponse('Data berhasil diubah', $data);
@@ -143,7 +144,7 @@ class RiwayatKehamilanFotoController extends Controller
     }
 
     public function getByGroupId($id){
-        $data = riwayat_kehamilan_foto::with('upload')->where('riwayat_kehamilan_group_id', $id)->get();
+        $data = riwayat_kehamilan_foto::with('uploads')->where('riwayat_kehamilan_group_id', $id)->get();
         return $this->apiResponse('Data berhasil diambil', $data);
     }
 }

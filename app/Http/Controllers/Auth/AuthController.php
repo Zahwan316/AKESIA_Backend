@@ -6,6 +6,7 @@ use App\apiResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Google_Client;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -27,7 +28,13 @@ class AuthController extends Controller
 
             $token = JWTAuth::claims(['role' => $user->role])->fromUser($user);
 
-            return response()->json(['success'=> true,'token'=> $token, 'message' => 'Login Berhasil', 'statusCode' => 200],200);
+            if($user->role != $request->selectedUser){
+                return response()->json(['message' => 'Username atau password salah', 'status_code' => 401], 401);
+            }
+            else{
+                return response()->json(['success'=> true,'token'=> $token, 'message' => 'Login Berhasil', 'statusCode' => 200],200);
+            }
+
         }catch(JWTException $e){
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
@@ -105,4 +112,38 @@ class AuthController extends Controller
         }
     }
 
+    public function googleLogin(Request $request){
+        $idToken = $request->input('idToken');
+
+        $client = new Google_Client(['client_id' => env('GOOGLE_CLIENT_ID')]); // Web Client ID kamu
+        $payload = $client->verifyIdToken($idToken);
+
+        if ($payload) {
+            $email = $payload['email'];
+            $name = $payload['name'];
+
+            // Cek apakah user sudah ada, kalau tidak buat
+            $user = User::firstOrCreate(
+                ['email' => $email],
+                ['nama_lengkap' => $name, 'password' => bcrypt(str()->random(12)), 'role' => 'user']
+            );
+
+            $token = JWTAuth::claims(['role' => $user->email])->fromUser($user);
+
+            // Buat token Laravel Sanctum atau JWT terserah
+            //$token = $user->createToken('google')->plainTextToken;
+
+            return response()->json([
+                'status' => true,
+                'token' => $token,
+                'user' => $user,
+                'message' => 'Login Berhasil',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Token tidak valid.',
+            ], 401);
+        }
+    }
 }
