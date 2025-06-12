@@ -20,4 +20,16 @@ class Form_pemeriksaan_lab extends Model
         'soap',
         'penatalaksanaan'
     ];
+
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'tanggal_pemeriksaan' => 'string',
+        'jam_pemeriksaan' => 'string',
+        'nama' => 'string',
+        'hasil' => 'string',
+        'tanggal_pelayanan' => 'string',
+        'jam_pelayanan' => 'string',
+        'soap' => 'string',
+        'penatalaksanaan' => 'string'
+    ];
 }

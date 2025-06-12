@@ -18,6 +18,16 @@ class Pemeriksaan extends Model
         'jam_kunjungan'
     ];
 
+    protected $casts = [
+        'id' => 'integer',
+        'bidan_id' => 'integer',
+        'ibu_id' => 'integer',
+        'pelayanan_id' => 'integer',
+        'pendaftaran_id' => 'integer',
+        'harga' => 'integer',
+    ];
+
+
     public function pelayanan(){
         return $this->belongsTo(Pelayanan::class);
     }

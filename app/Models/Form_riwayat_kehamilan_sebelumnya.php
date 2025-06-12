@@ -21,6 +21,19 @@ class Form_riwayat_kehamilan_sebelumnya extends Model
         'keterangan',
     ];
 
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'anak_ke' => 'integer',
+        'apiah' => 'string',
+        'umur_anak' => 'integer',
+        'p_l' => 'string',
+        'bbl' => 'string',
+        'cara_persalinan' => 'string',
+        'penolong' => 'string',
+        'tempat_persalinan' => 'string',
+        'keterangan' => 'string',
+    ];
+
     public function pemeriksaan(){
         return $this->belongsTo(Pemeriksaan::class);
     }

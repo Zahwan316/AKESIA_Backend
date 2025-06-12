@@ -12,4 +12,9 @@ class riwayat_kehamilan_group extends Model
         'user_id',
         'nama',
     ];
+
+    protected $casts = [
+        'user_id' => 'integer',
+        'nama' => 'string',
+    ];
 }

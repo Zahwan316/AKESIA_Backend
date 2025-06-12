@@ -26,6 +26,25 @@ class Ibu extends Model
         'usia_kehamilan',
         'user_id',
         'hpht',
+        'usia_kehamilan',
+    ];
+
+    protected $casts = [
+        'nik' => 'string',
+        'golongan_darah' => 'string',
+        'tempat_lahir' => 'string',
+        'tanggal_lahir' => 'string',
+        'pendidikan' => 'integer',
+        'pekerjaan' => 'integer',
+        'alamat_domisili' => 'string',
+        'telepon' => 'string',
+        'no_registrasi_kohort_ibu' => 'string',
+        'Nama_Keluarga' => 'string',
+        'berat_badan' => 'integer',
+        'tinggi_badan' => 'integer',
+        'usia_kehamilan' => 'integer',
+        'user_id' => 'integer',
+        'hpht' => 'string',
     ];
 
     public function User(): BelongsTo

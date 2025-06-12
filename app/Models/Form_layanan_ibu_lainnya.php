@@ -16,4 +16,13 @@ class Form_layanan_ibu_lainnya extends Model
         'catatan_soap',
         'keterangan',
     ];
+
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'nama_ibu' => 'string',
+        'umur_ibu' => 'integer',
+        'booking_layanan' => 'string',
+        'catatan_soap' => 'string',
+        'keterangan' => 'string',
+    ];
 }

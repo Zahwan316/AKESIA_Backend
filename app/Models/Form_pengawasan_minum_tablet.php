@@ -14,4 +14,11 @@ class Form_pengawasan_minum_tablet extends Model
         'tanggal',
         'jam'
     ];
+
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'bulan_ke' => 'integer',
+        'tanggal' => 'string',
+        'jam' => 'string'
+    ];
 }

@@ -15,6 +15,12 @@ class Pelayanan extends Model
         'form_id',
     ];
 
+    protected $casts = [
+        'id' => 'integer',
+        'jenis_layanan_id' => 'integer',
+        'harga' => 'integer',
+    ];
+
 
     public function pendaftaran(){
         return $this->hasOne(Pendaftaran::class);

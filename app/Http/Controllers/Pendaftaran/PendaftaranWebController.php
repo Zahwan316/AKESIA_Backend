@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Pendaftaran;
 use App\Http\Controllers\Controller;
 use App\Models\Bidan;
 use App\Models\Ibu;
+use App\Models\Notifications;
 use App\Models\Pemeriksaan;
 use App\Models\Pendaftaran;
 use App\Models\User;
@@ -14,7 +15,7 @@ use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 use Kreait\Firebase\Exception\Messaging\NotFound;
 use Illuminate\Support\Facades\Log;
-
+use Kreait\Firebase\Exception\Messaging\InvalidArgument;
 
 class PendaftaranWebController extends Controller
 {
@@ -102,6 +103,12 @@ class PendaftaranWebController extends Controller
             $bidan = Bidan::find($data->bidan_id);
             $user = User::findOrFail($ibu->user_id);
             $bidanUser = User::findOrFail($bidan->user_id);
+            $notifications = Notifications::create([
+                'user_id' => $user->id,
+                'title' => 'Pendaftaran Diterima',
+                'message' => 'Halo bu, pendaftaran ibu sudah diterima nih. Jangan lupa untuk datang sesuai jadwal',
+            ]);
+
             if ($user->fcm_token) {
                 $messaging = (new Factory)
                     ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
@@ -139,7 +146,7 @@ class PendaftaranWebController extends Controller
                     $messaging->send($message);
                 }
             }
-            catch (NotFound $e) {
+            catch (NotFound  | InvalidArgument $e) {
                 // Token tidak valid → hapus dari database
                 $bidanUser->update(['fcm_token' => null]);
 

@@ -13,6 +13,11 @@ class Pelayanan_Form_Item extends Model
         'form_id',
     ];
 
+    protected $casts = [
+        'pelayanan_id' => 'integer',
+        'form_id' => 'integer',
+    ];
+
     public function pelayanan(){
         return $this->belongsTo(Pelayanan::class, 'pelayanan_id');
     }

@@ -18,4 +18,15 @@ class Form_bayi_saat_lahir extends Model
         'kondisi_bayi_saat_lahir',
         'asuhan_bayi_baru_lahir'
     ];
+
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'anak_ke' => 'integer',
+        'berat_lahir' => 'string',
+        'panjang_badan' => 'string',
+        'lingkar_kepala' => 'string',
+        'jenis_kelamin' => 'string',
+        'kondisi_bayi_saat_lahir' => 'string',
+        'asuhan_bayi_baru_lahir' => 'string'
+    ];
 }

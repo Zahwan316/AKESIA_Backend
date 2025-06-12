@@ -13,5 +13,10 @@ class Album_foto_janin extends Model
         'nama'
     ];
 
+    protected $casts = [
+        'user_id' => 'integer',
+        'nama' => 'string',
+    ];
+
 
 }

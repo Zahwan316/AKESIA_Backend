@@ -22,4 +22,21 @@ class Bayi extends Model
         'no_catatan_medik_rs',
         'anak_ke',
     ];
+
+    protected $casts = [
+        'ibu_id' => 'integer',
+        'nama_lengkap' => 'string',
+        'jenis_kelamin' => 'string',
+        'nik' => 'string',
+        'golongan_darah' => 'string',
+        'tempat_lahir' => 'string',
+        'tanggal_lahir' => 'date',
+        'no_akta_kelahiran' => 'string',
+        'no_registrasi_kohort_bayi' => 'string',
+        'no_registrasi_kohort_balita' => 'string',
+        'no_registrasi_kohort_ibu' => 'string',
+        'no_catatan_medik_rs' => 'string',
+        'anak_ke' => 'integer',
+    ];
+
 }

@@ -13,4 +13,10 @@ class Notifications extends Model
         'title',
         'message'
     ];
+
+    protected $casts = [
+        'user_id' => 'integer',
+        'title' => 'string',
+        'message' => 'string'
+    ];
 }

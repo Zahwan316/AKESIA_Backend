@@ -14,4 +14,11 @@ class Form_kesimpulan_ibu_nifas extends Model
         'komplikasi_nifas',
         'keadaan_bayi',
     ];
+
+    protected $casts = [
+        'pemeriksaan_id' => 'integer',
+        'keadaan_ibu' => 'string',
+        'komplikasi_nifas' => 'string',
+        'keadaan_bayi' => 'string',
+    ];
 }

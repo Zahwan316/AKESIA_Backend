@@ -20,6 +20,19 @@ class Pendaftaran extends Model
         'isVerif',
     ];
 
+    protected $casts = [
+        'ibu_id' => 'integer',
+        'bidan_id' => 'integer',
+        'pelayanan_id' => 'integer',
+        'bayi_id' => 'integer',
+        'tanggal_pendaftaran' => 'string',
+        'jam_pendaftaran' => 'string',
+        'jam_ditentukan' => 'string',
+        'status' => 'string',
+        'keluhan' => 'string',
+        'isVerif' => 'boolean',
+    ];
+
     public function pelayanan(){
         return $this->belongsTo(Pelayanan::class);
     }

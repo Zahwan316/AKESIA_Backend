@@ -13,7 +13,9 @@ use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Log;
+use Kreait\Firebase\Exception\Messaging\InvalidArgument;
+use Kreait\Firebase\Exception\Messaging\NotFound;
 
 class PemeriksaanUmum extends Controller
 {
@@ -167,18 +169,30 @@ class PemeriksaanUmum extends Controller
             $tanggal = Carbon::parse($request->tanggal_kontrol_kembali)->translatedFormat('l, d F Y');
 
             $user = User::findOrFail($request->user_id);
-            if ($user->fcm_token) {
-                $messaging = (new Factory)
-                    ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
-                    ->createMessaging();
 
-                $message = CloudMessage::withTarget('token', $user->fcm_token)
-                    ->withNotification(Notification::create(
-                        'Kontrol Kembali yuk!',
-                        'Ibu, mohon kontrol kembali pada tanggal '.$tanggal
-                    ));
 
-                $messaging->send($message);
+            try{
+                if ($user->fcm_token) {
+                    $messaging = (new Factory)
+                        ->withServiceAccount(storage_path('app/firebase/firebase-credentials.json'))
+                        ->createMessaging();
+
+                    $message = CloudMessage::withTarget('token', $user->fcm_token)
+                        ->withNotification(Notification::create(
+                            'Kontrol Kembali yuk!',
+                            'Ibu, mohon kontrol kembali pada tanggal '.$tanggal
+                        ));
+
+                    $messaging->send($message);
+                }
+            }
+            catch (NotFound  | InvalidArgument $e) {
+                // Token tidak valid → hapus dari database
+                $user->update(['fcm_token' => null]);
+
+                Log::warning("FCM token invalid, telah dihapus untuk user ID: {$user->id}");
+            } catch (\Exception $e) {
+                Log::error("Gagal kirim notifikasi: " . $e->getMessage());
             }
 
             $data = Form_pemeriksaan_umum::find($id);

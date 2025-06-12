@@ -21,6 +21,20 @@ class Bidan extends Model
         'jenis_praktik_id',
     ];
 
+    protected $casts = [
+        'user_id' => 'integer',
+        'pendidikan_id' => 'integer',
+        'pekerjaan_id' => 'integer',
+        'provinsi_id' => 'integer',
+        'kota_id' => 'integer',
+        'image_id' => 'integer',
+        'status_keanggotaan_ibi' => 'string',
+        'nama_tempat_praktik' => 'string',
+        'no_STR' => 'string',
+        'no_SIP' => 'string',
+        'jenis_praktik_id' => 'integer',
+    ];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

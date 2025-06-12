@@ -17,6 +17,15 @@ class Album_foto extends Model
         'tanggal'
     ];
 
+    protected $casts = [
+        'img_id' => 'integer',
+        'user_id' => 'integer',
+        'usg_id' => 'integer',
+        'judul' => 'string',
+    ];
+
+
+
     public function uploads(){
         return $this->belongsTo(Upload::class, 'img_id','id');
     }
