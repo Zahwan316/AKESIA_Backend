@@ -1,28 +1,23 @@
 @extends('layout.main')
 
-@section('title', 'Bidan')
+@section('title', 'Banner')
 
 @section('content')
     <div>
         <div class='mb-3'>
-            <h2>Data Bidan</h2>
-            <p class='text-danger' style='font-weight: bold'>Mohon untuk dibaca, akun bidan akan muncul jika bidan sudah mengisi data dengan lengkap di aplikasi akesia yang ada di hp!</p>
-            <p class='text-danger' style='font-weight: bold'>Fitur ini hanya untuk menambahkan akun agar bidan bisa login ke aplikasi!</p>
+            <h2>Banner</h2>
         </div>
         <div class='mb-5'>
-            <x-button route="{{ route('bidan.create',) }}" color="btn-primary">
-                + Tambah Bidan
+            <x-button route="{{ route('banner.create',) }}" color="btn-primary">
+                + Tambah Banner
             </x-button>
         </div>
         <table class="table table-striped table-hover table-bordered table-responsive w-full">
             <thead class="">
                 <tr style="vertical-align: middle">
                     <th style="vertical-align: middle" scope="col">No</th>
-                    <th scope="col">Nama Bidan</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Status Keanggotaan</th>
-                    <th scope="col">No Str</th>
-                    <th scope="col">No Sip</th>
+                    <th scope="col">Nama Banner</th>
+                    <th scope="col">Gambar</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -33,25 +28,27 @@
                         <td colspan="9" rowspan="9" class="w-full"  style="vertical-align: middle">
                             <div class='d-flex justify-content-center align-items-center'>
                                 <x-empty >
-                                    Belum ada data bidan
+                                    Belum ada data banner
                                 </x-empty>
                             </div>
                         </td>
                     </tr>
                 @else
-                    @foreach ($data as $key => $bidan)
+                    @foreach ($data as $key => $banner)
                     <tr>
                         <th scope="row">{{ $data->firstItem() + $key }}</th>
-                        <td>{{$bidan->user->nama_lengkap}}</td>
-                        <td>{{$bidan->user->email}}</td>
-                        <td>{{$bidan->status_keanggotaan_ibi}}</td>
-                        <td>{{$bidan->no_STR}}</td>
-                        <td>{{$bidan->no_SIP}}</td>
+                        <td>{{$banner->name}}</td>
                         <td>
-                            <x-button route="{{ route('bidan.edit', $bidan->id) }}" color="btn-primary">
+                            <img
+                                src='{{asset($banner->upload->path)}}'
+                                style="width: 300px; height: 200px; object-fit: contain"
+                            />
+                        </td>
+                        <td>
+                            <x-button route="{{ route('banner.edit', $banner->id) }}" color="btn-primary">
                                 Edit
                             </x-button>
-                            <form action="{{ route('bidan.destroy', $bidan->id) }}" method="POST" class="d-inline delete-form">
+                            <form action="{{ route('banner.destroy', $banner->id) }}" method="POST" class="d-inline delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger show_confirm">Hapus</button>

@@ -31,11 +31,9 @@
                         @if($data->isEmpty())
                         <tr>
                             <td rowspan="4" class='d-flex justify-content-center align-items-center'>
-                                <img
-                                    src='{{asset('img/emptydata.png')}}'
-                                    class='w-25'
-                                />
-                                <h3>Belum ada data yang masuk hari ini</h3>
+                                <x-empty >
+                                    Belum ada data hari ini
+                                </x-empty>
                             </td>
                         </tr>
                         @else

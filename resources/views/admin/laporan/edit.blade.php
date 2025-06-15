@@ -53,6 +53,15 @@
             $forms = [
                 'form_pelayanan_bayi' => 'Formulir Pelayanan Bayi',
                 'form_pemeriksaan_umum' => 'Formulir Pemeriksaan Umum',
+                'form_bayi_saat_lahir' => 'Formulir Bayi Saat Lahir',
+                'form_kesimpulan_ibu_nifas' => 'Formulir Kesimpulan Ibu Nifas',
+                'form_layanan_ibu_lainnya' => 'Formulir Layanan Ibu Lainnya',
+                'form_pelayanan_ibu_bersalin' => 'Formulir Pelayanan Ibu Bersalin',
+                'form_pelayanan_ibu_nifas' => 'Formulir Pelayanan Ibu Nifas',
+                'form_pemeriksaan_lab' => 'Formulir Pemeriksaan Lab',
+                'form_pengawasan_minum_tablet' => 'Formulir Pengawasan Minum Tablet',
+                'form_riwayat_kehamilan_sebelumnya' => 'Formulir Riwayat Kehamilan Sebelumnya',
+                'form_riwayat_kehamilan_sekarang' => 'Formulir Riwayat Kehamilan Sekarang',
                 // tambahkan relasi lainnya di sini
             ];
             @endphp
@@ -114,7 +123,6 @@
                 @endif
             @endforeach
 
-        {{$data->pemeriksaan->form_pelayanan_bayi}}
         </div>
     </div>
 @endsection

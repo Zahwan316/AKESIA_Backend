@@ -11,7 +11,7 @@ class Ref_Kota extends Model
 
     protected $casts = [
         'provinsi_id' => 'integer',
-    ];.
+    ];
 
     public function provinsi(){
         return $this->belongsTo(Ref_Provinsi::class);

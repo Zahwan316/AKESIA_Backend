@@ -53,6 +53,15 @@ class LaporanWebController extends Controller
             'pemeriksaan.pendaftaran',
             'pemeriksaan.form_pelayanan_bayi.tambahan_layanan',
             'pemeriksaan.form_pemeriksaan_umum',
+            'pemeriksaan.form_bayi_saat_lahir',
+            'pemeriksaan.form_kesimpulan_ibu_nifas',
+            'pemeriksaan.form_layanan_ibu_lainnya',
+            'pemeriksaan.form_pelayanan_ibu_bersalin',
+            'pemeriksaan.form_pelayanan_ibu_nifas',
+            'pemeriksaan.form_pemeriksaan_lab',
+            'pemeriksaan.form_pengawasan_minum_tablet',
+            'pemeriksaan.form_riwayat_kehamilan_sebelumnya',
+            'pemeriksaan.form_riwayat_kehamilan_sekarang',
             'ibu',
             'bayi'
         )
@@ -61,6 +70,15 @@ class LaporanWebController extends Controller
         $formRelations = [
             'form_pelayanan_bayi.tambahan_layanan',
             'form_pemeriksaan_umum',
+            'form_bayi_saat_lahir',
+            'form_kesimpulan_ibu_nifas',
+            'form_layanan_ibu_lainnya',
+            'form_pelayanan_ibu_bersalin',
+            'form_pelayanan_ibu_nifas',
+            'form_pemeriksaan_lab',
+            'form_pengawasan_minum_tablet',
+            'form_riwayat_kehamilan_sebelumnya',
+            'form_riwayat_kehamilan_sekarang',
             // tambahkan semua relasi form di sini
         ];
 

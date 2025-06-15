@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Layanan;
+namespace App\Http\Controllers\Banner;
 
 use App\Http\Controllers\Controller;
-use App\Models\Jenis_layanan;
+use App\Models\Banner;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class JenisPelayananWebController extends Controller
+class BannerWebController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,9 @@ class JenisPelayananWebController extends Controller
     public function index()
     {
         //
-        $data = Jenis_layanan::with('upload')->paginate(10);
+        $data = Banner::with('upload')->paginate(10);
 
-        return view('admin.jenis_pelayanan.index', compact('data'));
+        return view('admin.banner.index', compact('data'));
     }
 
     /**
@@ -27,7 +27,7 @@ class JenisPelayananWebController extends Controller
     public function create()
     {
         //
-        return view('admin.jenis_pelayanan.create');
+        return view('admin.banner.create');
     }
 
     /**
@@ -37,9 +37,8 @@ class JenisPelayananWebController extends Controller
     {
         //
         $validate = $request->validate([
-            'nama' => 'required|string',
-            'keterangan' => 'required|string',
-            'img' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+            'name' => 'required|string',
+            'img' => 'required|image|mimes:png,jpg,jpeg|max:2048'
         ]);
 
         try{
@@ -50,13 +49,12 @@ class JenisPelayananWebController extends Controller
                     'user_id' => 1,
                 ]);
             }
-            $data = Jenis_layanan::create([
-                'nama' => $request->nama,
-                'keterangan' => $request->keterangan,
+            $data = Banner::create([
+                'name' => $request->name,
                 'img_id' => $upload->id
             ]);
 
-            return redirect()->route('jenis_layanan.index')->with(['success' => 'Data berhasil disimpan']);
+            return redirect()->route('banner.index')->with(['success' => 'Data berhasil ditambahkan']);
         }
         catch(\Exception $e){
             return redirect()->back()->with(['error' => $e->getMessage()]);
@@ -69,6 +67,7 @@ class JenisPelayananWebController extends Controller
     public function show(string $id)
     {
         //
+
     }
 
     /**
@@ -77,9 +76,9 @@ class JenisPelayananWebController extends Controller
     public function edit(string $id)
     {
         //
-        $data = Jenis_layanan::with('upload')->find($id);
+        $data = Banner::with('upload')->findOrFail($id);
 
-        return view('admin.jenis_pelayanan.edit', compact('data'));
+        return view('admin.banner.edit', compact('data'));
     }
 
     /**
@@ -89,16 +88,13 @@ class JenisPelayananWebController extends Controller
     {
         //
         $validate = $request->validate([
-            'nama' => 'nullable|string',
-            'keterangan' => 'nullable|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+            'name' => 'nullable|string',
+            'img' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
         ]);
 
         try{
-            $data = Jenis_layanan::findOrFail($id);
-
+            $data = Banner::findOrFail($id);
             if($request->has('img')){
-                //add new image
                 $path = $request->file('img')->store('uploads', 'public');
                 $upload = Upload::create([
                     'path' => 'storage/'.$path,
@@ -106,17 +102,14 @@ class JenisPelayananWebController extends Controller
                 ]);
                 $data->img_id = $upload->id;
             }
-
             $data->update([
-                'nama' => $request->nama,
-                'keterangan' => $request->keterangan
+                'name' => $request->name,
             ]);
 
-            return redirect()->route('jenis_layanan.index')->with(['success' => 'Data berhasil diupdate']);
-
+            return redirect()->route('banner.index')->with(['success' => 'Data berhasil diubah']);
         }
         catch(\Exception $e){
-            return back()->with(['error' => $e->getMessage()]);
+            return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
 
@@ -126,21 +119,25 @@ class JenisPelayananWebController extends Controller
     public function destroy(string $id)
     {
         //
-        $data = Jenis_layanan::findOrFail($id);
+        $data = Banner::findOrFail($id);
+        try{
+            if($data->img_id){
+                $upload = Upload::find($data->img_id);
+                if($upload && Storage::disk('public')->exists($upload->path)){
+                    Storage::disk('public')->delete($upload->path);
+                }
 
-        if ($data->img_id) {
-            $upload = Upload::find($data->img_id);
-            if ($upload && Storage::disk('public')->exists($upload->path)) {
-                Storage::disk('public')->delete($upload->path);
+                // Hapus entri upload
+                if($upload){
+                    $upload->delete();
+                }
             }
 
-            // Hapus entri upload
-            if ($upload) {
-                $upload->delete();
-            }
+            $data->delete();
+            return redirect()->back()->with('success', 'Data berhasil dihapus');
         }
-        $data->delete();
-
-        return redirect()->route('jenis_layanan.index')->with(['success' => 'Data berhasil dihapus']);
+        catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

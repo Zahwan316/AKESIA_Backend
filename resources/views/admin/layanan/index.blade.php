@@ -30,11 +30,9 @@
                     <tr>
                         <td colspan="9" rowspan="9" class="w-full"  style="vertical-align: middle">
                             <div class='d-flex justify-content-center align-items-center'>
-                                <img
-                                    src='{{asset('img/emptydata.png')}}'
-                                    class='w-25'
-                                />
-                                <h3>Belum ada data layanan</h3>
+                                <x-empty >
+                                    Belum ada data layanan
+                                </x-empty>
                             </div>
                         </td>
                     </tr>

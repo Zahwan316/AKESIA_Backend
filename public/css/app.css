@@ -2,3 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --primary: #FF75B6;
+    --primary-soft: #FFE5F1;
+}
+
+/* Text Color */
+.text-akesia {
+    color: var(--primary) !important;
+}
+
+/* Background Color */
+.bg-akesia {
+    background-color: var(--primary) !important;
+}
+
+.bg-soft-akesia {
+    background-color: var(--primary-soft) !important;
+}
+
+/* Button */
+.btn-akesia {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.btn-akesia:hover {
+    background-color: #e65fa3;
+    border-color: #e65fa3;
+    color: white;
+}
+
+/* Divider */
+.divider {
+    width: 80px;
+    height: 4px;
+}
+
+/* Feature Icon */
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to bottom, white 0%, var(--primary-soft) 100%);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
