@@ -45,7 +45,7 @@ class BidanController extends Controller
             'img' => 'required|mimes:png,jpg,jpeg',
             'status_keanggotaan_ibi' => 'required',
             //'nama_tempat_praktik' => 'required',
-            'no_STR' => 'required',
+            'no_STR' => 'required|max:16',
             'no_SIP' => 'required',
             'nama_lengkap' => 'nullable',
             'tempat_bekerja' => 'nullable'

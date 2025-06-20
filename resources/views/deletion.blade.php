@@ -83,7 +83,7 @@
 
                             <hr class="my-4">
 
-                            <div class="alert alert-info">
+                            <div class="alert alert-warning">
                                 <h5 class="alert-heading"><i class="bi bi-info-circle-fill me-2"></i>Proses Penghapusan Data</h5>
                                 <p class="mb-0">Setelah Anda mengirimkan permintaan, kami akan memverifikasi identitas Anda melalui email. Proses penghapusan data akan dilakukan dalam waktu maksimal 30 hari kerja setelah verifikasi berhasil.</p>
                             </div>
